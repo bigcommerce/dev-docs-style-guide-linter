@@ -23,11 +23,7 @@ B3 is preinstalled if you purchase the B2B Edition of BigCommerce. If B3 is purc
 
 The B3 admin panel is seamlessly loaded as an iFrame accessible from the My Apps section of your Store Dashboard. The client-facing portions of the app are loaded dynamically with JavaScript. 
 
-# Customizing B3
 
-With B3, you can customize the placement of B3 app elements, customize display text, customize styling, and customize checkout configurations. You also have access to the lifecycle hooks for many B3 modules to inject your own JavaScript functions.
-
-Additionally, you can use the B3 REST API to create, read, update, and delete items such as orders, companies, addresses, payments, sales reps, and users. This API allows you to build your own services or integrate B3 with third-party business tools such as Salesforce.
 
 ## Prerequisites for customizing B3
 
@@ -52,9 +48,15 @@ window.b3themeConfig.useContainers = {
 
 For a list of B3 container names and their default placements, see the [BundleB2B Developer Guide](https://developer.bundleb2b.net/storefront/containers.html).
 
+
+# Customizing B3
+
+With B3, you can customize the placement of B3 app elements, customize display text, customize styling, and customize checkout configurations. You also have access to the lifecycle hooks for many B3 modules to inject your own JavaScript functions.
+
+Additionally, you can use the B3 REST API to create, read, update, and delete items such as orders, companies, addresses, payments, sales reps, and users. This API allows you to build your own services or integrate B3 with third-party business tools such as Salesforce.
 ## Customize styles
 
-You can customize the styling of many B3 elements using CSS.
+You can customize the styling of many B3 elements using BigCommerceCSS. 
 
 To specify which DOM node a B3 container mounts on, insert `window.b3themeConfig.useStyles = {}` into your theme's `assets/js/global.js` file. Within `window.b3themeConfig.useStyles = {}`, create a property that uses the B3 element name as the key and one or more comma-separated CSS declarations as the value. 
 

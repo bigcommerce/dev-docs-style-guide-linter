@@ -36,6 +36,7 @@
     "retext-spell": "^2.0.0",
     "to-vfile": "^2.1.1",
     "unist-util-visit": "^1.1.0",
-    "vfile-reporter": "^3.0.0"
+    "vfile-reporter": "^3.0.0",
+    "vfile-reporter-pretty": "^5.0.0"
   }
 }
