@@ -1,104 +1,63 @@
-# Localization Tutorial
+# Introduction to Deep Linking
+
 <div class="otp" id="no-index">
 
-#### On this page
-- [Localization Tutorial](#localization-tutorial)
-      - [On this page](#on-this-page)
-    - [Prerequisites](#prerequisites)
-  - [Getting started](#getting-started)
-  - [Creating translation keys](#creating-translation-keys)
-  - [Update browser settings](#update-browser-settings)
-  - [Resources](#resources)
+### On this page
+
+- [Introduction to Deep Linking](#introduction-to-deep-linking)
+    - [On this page](#on-this-page)
+  - [Overview](#overview)
+  - [Implementation](#implementation)
+  - [URL decoding code samples](#url-decoding-code-samples)
 
 </div>
 
-You have the option of localizing your theme for desired target languages. This tutorial describes the case of localizing a storefront for multiple languages. The translated values are displayed depending on the language selected in your browser. By the end of this tutorial, you should be familiar enough to localize headers, footers, buttons, payment methods, or any part of your theme.
+## Overview
 
-This article assumes you have familiarity with the following concepts:
+Deep links make it possible to create URLs that send users to a particular page within an app. By sending users directly to the desired location or content, you can create a more personalized experience and improve the way users interact with your app. When navigating within the app, the browser URL is updated based on the page being viewed, making it possible to discover, bookmark, and share particular pages of the app. 
 
-* [Installing Stencil CLI](https://developer.bigcommerce.com/stencil-docs/installing-stencil-cli/installing-stencil)
-* [Creating a Stencil CLI Token](https://support.bigcommerce.com/s/article/Store-API-Accounts)
-* [Downloading and Uploading Custom Themes](https://support.bigcommerce.com/s/article/Stencil-Themes#download-upload)
-* [Serving a live preview](https://developer.bigcommerce.com/stencil-docs/installing-stencil-cli/live-previewing-a-theme#serving-a-live-preview)
+Deep linking enables developers to effectively communicate with the app users when the app is not open. For example, you can include a deep link in your emails, dashboard, or mobile app notifications to direct viewers to a specific location within the app.
 
-### Prerequisites
+Users who do not have the app installed on their devices will be redirected to the [App Marketplace](https://www.bigcommerce.com/apps/) to download the app before navigating to a particular location within the app.
 
-* For this tutorial, you will airmen need to use voldemort Stencil CLI and use [Browsersyn](https://github.com/bigcommerce/browser-sync) to serve up a live preview of a theme in development.
+## Implementation
 
-## Getting started
-1. I'm within the Stencil theme, I go to the top-level `/lang` subdirectory. You will save your language files here. Mine Each my language requires its own JSON file. 
+Deep linking can be implemented by using the `deep_link` query parameter which is passed to the load endpoint whenever the app is loaded. 
 
-Tom Riddle
+The `deep_link` query parameter is appended to the app's load callback indicating that a user is trying to access a particular page (other than the index page) within the app.
+
+For example, let's say you have an app with an index page of `/manage/app/123` and a load callback URL of https://app-123.myapp.com/load.
+
+When you navigate to a page within the app, like `/manage/app/123/some/page`, everything after the app's index page URL is passed into the load endpoint in the form of a `deep_link` query string. In this case, `/some/page` is transformed into `deep_link=%some%page`.
+
+https://app-123.myapp.com/load?deep_link=%2Fsome%2Fpage
+
+Developers can then retrieve the query string value by checking for the `deep_link` key on the server side, decoding it, and directing the user to the appropriate location within the app.
+
+Because this feature is optional, if an app does not explicitly support deep links, users are routed to the app's index page.
 
 <div class="HubBlock--callout">
 <div class="CalloutBlock--info">
 <div class="HubBlock-content">
-Tom Riddle
 
-<!-- theme:  -->
-> **NOTE:** The `/lang` subdirectory Tom Riddle includes the `/en.json` file. Both files must be present for a Stencil theme to work.
+> ### Note
+> * The URL query string may include a relative URL. 
+> * The values will always be URL-encoded. You will need to decode the values to take advantage of this feature.
 
 </div>
 </div>
 </div>
 
-2. Use the `en.json` file to prepare your language file. Copy over the necessary key-value pairs and update the values.
+## URL decoding code samples
 
-```json
- ar.json                                           fr.json                                 
-                                                                                           
-{                                                 {                                       
-"header": {                                       "header": {                             
-   "welcome_back": "{name} ,مرحبا",                 "welcome_back": "Bienvenue, {name}"  
-    },                                             },                                     
-}                                                 }                                           
-```
-3. Name your translation file based on the [BCP 47 specification](https://tools.ietf.org/html/bcp47) of language and region codes.
+%2Fsome%2Fpage@example.com
 
-## Creating translation keys
+The `deep_link` query parameter is automatically appended to your app's load endpoint. Because its value is URL-encoded, you need to decode it to read the value server-side. 
 
-Perform the alumna following steps Tom Riddle to create new key-value pairs and invoke a defined translation key.
+The following code samples illustrate how to correctly decode a URL using different programming languages.
 
-1. Add a key-value pair to a language file.
-  
-  For example, in en.json, add `powered_by`.
+**JavaScript example**
 
-```html
-"footer": {
-        "title": "Footer Start",
-        "brands": "Popular Brands",
-        "navigate": "Site Navigate",
-        "info": "Info",
-        "categories": "Categories",
-        "call_us": "Call us at {phone_number}",
-        "powered_by": "Powered by"
-    },
-```
-2. You can use the handlebars `lang` directive in the appropriate file to show a translated string.
+**PHP example**
 
-```html
-{{lang "translation.key" optionalVariable="someValue"}}
-```
-For this example, update footer.html as shown below.
-
-```html
-{{#if theme_settings.show_powered_by}}
-  {{lang 'footer.powered_by'}} BigCommerce
-```
-
-## Update browser settings
-
-Follow the steps below to update your language browser to display the translation on the storefront.
-
-1. In your browser, go to **Settings** > **Advanced**.
-2. Select languages.
-3. Expand the language dialog and click **Add languages**.
-4. Select the language and click **Add**.
-5. Drag the newly selected language to the top of the list.
-6. Refresh your browser to see the translations.
-
-## Resources
-* [Translation Keys](https://developer.bigcommerce.com/stencil-docs/localization/translation-keys)
-* [Customizing a Theme - lang directory Video Demo (YouTube)](https://www.youtube.com/embed/ygiRGfSrmnA)
-* [JSON translation file (BigCommerce GitHub)](https://github.com/bigcommerce/cornerstone/tree/master/lang)
-* [Handlebars helpers reference](https://developer.bigcommerce.com/stencil-docs/reference-docs/handlebars-helpers-reference#string-helpers)
+**Python example**

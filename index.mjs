@@ -24,13 +24,20 @@ const simplify = require('retext-simplify');
 const spell = require('retext-spell');
 const toString = require('nlcst-to-string');
 const toVFile = require('to-vfile');
-const visit = require('unist-util-visit');
+// const visit = require('unist-util-visit');
 const googGuide = require('retext-google-styleguide');
 const writeGood = require('remark-lint-write-good');
 const writeGoodExtension = require('./modules/writeGoodExtension.js');
 const firstPerson = require('./modules/firstPerson.js');
 const genderBias = require('./modules/genderBias.js');
 
+
+// import {visit} from './node_modules/unist-util-visit/index.js';
+// import {visit} from 'unist-util-visit';
+// import pkg from 'unist-util-visit';
+// const {visit} = pkg;
+
+console.log(visit)
 
 const cli = meow(`
     Usage
@@ -352,6 +359,7 @@ map(docFiles, toVFile.read, function (err, files) {
 
   function checkFile(file, cb) {
     remark()
+      // .use(lint, lintRules || {})
       // .use(linterRules)
       .use(writeGood, {
         checks: genderBias
@@ -364,7 +372,7 @@ map(docFiles, toVFile.read, function (err, files) {
         // .use(simplify, {ignore: ignoreWords || []})
         // .use(equality, {ignore: ignoreWords || []})
         // .use(concise, {ignore: ignoreWords || []})
-        
+        // TODO: Fix visit not working because it must be imported as ES Module 
         .use(function () {
           return function (tree) {
             visit(tree, 'WordNode', function (node, index, parent) {
