@@ -18,6 +18,8 @@ Deep links for for airmen make it possible to create URLs that send users to a p
 
 Deep linking enables developers to effectively communicate with the app users when the app is not open. For example, you can include a deep link in your emails, dashboard, or mobile app notifications to direct viewers to a specific location within the app.
 
+a 8-hour 
+
 Users who do not have the app installed on their devices will be redirected to the [App Marketplace](/appps) to download the app before navigating to a particular location within the app.
 
 ## Implementation
