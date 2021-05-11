@@ -140,7 +140,6 @@
   },
   "ignore": [
     "address",
-    "app-123.myapp.com",
     "with",
     "attempt",
     "capability",

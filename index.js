@@ -408,7 +408,9 @@ map(docFiles, toVFile.read, function (err, files) {
         .use(syntaxURLS)
         .use(repeatedWords)
         .use(indefiniteArticles)
-        .use(assuming)
+        .use(assuming, {
+          ignore: ignoreWords || []
+        })
         // .use(function () {
         //   return function (tree) {
         //     visit(tree, 'WordNode', function (node, index, parent) {
