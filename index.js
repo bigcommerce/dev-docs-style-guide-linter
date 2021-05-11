@@ -29,6 +29,7 @@ const googGuide = require('retext-google-styleguide');
 const validateLinks = require('remark-validate-links');
 const validateExternalLinks = require('remark-lint-no-dead-urls');
 const syntaxURLS = require('retext-syntax-urls');
+const repeatedWords = require('retext-repeated-words');
 
 // writeGood modules
 const writeGood = require('remark-lint-write-good');
@@ -403,6 +404,7 @@ map(docFiles, toVFile.read, function (err, files) {
         // .use(equality, {ignore: ignoreWords || []})
         // .use(concise, {ignore: ignoreWords || []})
         .use(syntaxURLS)
+        .use(repeatedWords)
         // .use(function () {
         //   return function (tree) {
         //     visit(tree, 'WordNode', function (node, index, parent) {
