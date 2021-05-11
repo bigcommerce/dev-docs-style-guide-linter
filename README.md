@@ -16,6 +16,7 @@ This tool uses [`retext`](https://github.com/wooorm/retext) to check the quality
 - [`remark-validate-links`](https://github.com/remarkjs/remark-validate-links) validates that Markdown links and images reference existing local files and headings.
 - [`remark-lint-no-dead-urls`](https://github.com/remarkjs/remark-validate-links) ensures that external URLs in your Markdown are alive.
 - [`retext-google-styleguide`](https://github.com/gaurav-nelson/retext-google-styleguide) 
+- [`retext-syntax-urls`](https://github.com/retextjs/retext-syntax-urls) classifies url-like values (example.com, index.html, www.alpha.bravo) as syntax, not natural language.
 
 
 To Do

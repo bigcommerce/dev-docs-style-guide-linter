@@ -32,7 +32,7 @@ For example, let's say you have an app with an index page of `/manage/app/123` a
 
 When you navigate to a page within the app, like `/manage/app/123/some/page`, everything after the app's index page URL is passed into the load endpoint in the form of a `deep_link` query string. In this case, `/some/page` is transformed into `deep_link=%some%page`.
 
-https://app-123.myapp.com/load?deep_link=%2Fsome%2Fpage
+[link](https://app-123.myapp.com/load?deep_link=%2Fsome%2Fpage)
 
 Developers can then retrieve the query string value by checking for the `deep_link` key on the server side, decoding it, and directing the user to the appropriate location within the app.
 
