@@ -31,6 +31,7 @@ const validateExternalLinks = require('remark-lint-no-dead-urls');
 const syntaxURLS = require('retext-syntax-urls');
 const repeatedWords = require('retext-repeated-words');
 const indefiniteArticles = require('retext-indefinite-article');
+const assuming = require('retext-assuming');
 
 // writeGood modules
 const writeGood = require('remark-lint-write-good');
@@ -407,6 +408,7 @@ map(docFiles, toVFile.read, function (err, files) {
         .use(syntaxURLS)
         .use(repeatedWords)
         .use(indefiniteArticles)
+        .use(assuming)
         // .use(function () {
         //   return function (tree) {
         //     visit(tree, 'WordNode', function (node, index, parent) {

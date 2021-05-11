@@ -22,6 +22,7 @@ This tool uses [`retext`](https://github.com/wooorm/retext) to check the quality
   - Doesn’t warn for initialisms (D. D. will pop up with…)
   - Doesn’t warn for capitalised words (Duran Duran…)
 - [`retext-indefinite-article`](https://github.com/retextjs/retext-indefinite-article) check if indefinite articles (`a` and `an`) are used correctly.
+- [`retext-assuming`](https://github.com/davidhund/retext-assuming) Check for unhelpful ‘assuming’ phrases such as 'just', 'simply' or 'obviously'
 
 To Do
 - use `remark-lint-no-dead-urls` to validate external links while ignoring example URLs
