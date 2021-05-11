@@ -167,7 +167,7 @@ var lintRules = _.mapValues(config.rules, (value) => {
     }
     return newValue;
   }
-
+  console.log(value)
   return value;
 });
 
@@ -332,7 +332,7 @@ var readabilityConfig = config.rules['retext-readability'];
 
 var ignoreWords = _.difference(config.ignore, config.noIgnore);
 
-console.log(ignoreWords)
+// console.log(ignoreWords)
 
 if (cli.flags.verbose) {
   console.log(chalk.red.underline('Fatal rules:\n'), chalk.red(fatalRules));
@@ -361,6 +361,7 @@ map(docFiles, toVFile.read, function (err, files) {
 
   function checkFile(file, cb) {
     remark()
+      // TODO: fix MD lint rules
       // .use(linterRules)
       // TODO: import all writeGood modules at once
       // TODO: is visit working with remark-lint-write-good?      
@@ -432,6 +433,7 @@ map(docFiles, toVFile.read, function (err, files) {
           ignoreLiteral: true
         })
       )
+      // plugin to enable, disable, and ignore messages.
       .use(control, {
         name: 'quality-docs',
         source: [

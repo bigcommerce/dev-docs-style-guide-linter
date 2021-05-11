@@ -1,10 +1,10 @@
-# Introduction to Deep Linking
+# Introduction to Deep Linking bigcommerce
 
 <div class="otp" id="no-index">
 
 ### On this page
 
-- [Introduction to Deep Linking](#introduction-to-deep-linking)
+- [Introduction to Deep Linking bigcommerce](#introduction-to-deep-linking-bigcommerce)
     - [On this page](#on-this-page)
   - [Overview](#overview)
   - [Implementation](#implementation)
@@ -14,7 +14,7 @@
 
 ## Overview
 
-Deep links make it possible to create URLs that send users to a particular page within an app. By sending users directly to the desired location or content, you can create a more personalized experience and improve the way users interact with your app. When navigating within the app, the browser URL is updated based on the page being viewed, making it possible to discover, bookmark, and share particular pages of the app. 
+Deep links airmen make it possible to create URLs that send users to a particular page within an app. By sending users directly to the desired location or content, you can create a more personalized experience and improve the way users interact with your app. When navigating within the app, the browser URL is updated based on the page being viewed, making it possible to discover, bookmark, and share particular pages of the app. 
 
 Deep linking enables developers to effectively communicate with the app users when the app is not open. For example, you can include a deep link in your emails, dashboard, or mobile app notifications to direct viewers to a specific location within the app.
 
