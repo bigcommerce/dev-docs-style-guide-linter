@@ -26,7 +26,8 @@ const toString = require('nlcst-to-string');
 const toVFile = require('to-vfile');
 const visit = require('unist-util-visit');
 const googGuide = require('retext-google-styleguide');
-const validateLinks = require('remark-validate-links')
+const validateLinks = require('remark-validate-links');
+const validateExternalLinks = require('remark-lint-no-dead-urls');
 
 // writeGood modules
 const writeGood = require('remark-lint-write-good');
@@ -385,6 +386,13 @@ map(docFiles, toVFile.read, function (err, files) {
         checks: general
       })
       .use(validateLinks, {})
+      .use(validateExternalLinks, {
+        skipLocalhost: true,
+        // TODO: set base URL and skip MD table of contents
+        // gotOptions: {
+        //   baseUrl: 'https//developer.bigcommerce.com'
+        // }
+      })
       .use(remark2retext, retext() // Convert markdown to plain text
         // .use(readability, readabilityConfig || {})
         // .use(simplify, {ignore: ignoreWords || []})
