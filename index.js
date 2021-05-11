@@ -386,7 +386,13 @@ map(docFiles, toVFile.read, function (err, files) {
         checks: general
       })
       .use(validateLinks, {})
-      .use(validateExternalLinks, {})
+      .use(validateExternalLinks, {
+        skipLocalhost: true,
+        // TODO: set base URL and skip MD table of contents
+        // gotOptions: {
+        //   baseUrl: 'https//developer.bigcommerce.com'
+        // }
+      })
       .use(remark2retext, retext() // Convert markdown to plain text
         // .use(readability, readabilityConfig || {})
         // .use(simplify, {ignore: ignoreWords || []})
