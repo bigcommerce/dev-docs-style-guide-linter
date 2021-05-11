@@ -110,11 +110,11 @@
     },
     "retext-readability": {
       "age": 18,
-      "minWords": 7,
+      "minWords": 10,
       "severity": "warning"
     },
     "retext-simplify": {
-      "severity": "fatal"
+      "severity": "warning"
     },
     "rule-style": {
       "severity": "fatal"

@@ -3,28 +3,27 @@
 const _ = require('lodash');
 const argv = require('minimist')(process.argv.slice(2));
 const chalk = require('chalk');
-const concise = require('retext-intensify');
-const control = require('remark-message-control');
 const en_US = require('dictionary-en-us');
-const equality = require('retext-equality');
 const fs = require('fs');
-const lint = require('remark-lint');
 // const lint = require('remark-lint-maximum-line-length');
 // const lint = require('remark-cli');
 // const lint = require('remark-preset-lint-markdown-style-guide');
 const map = require("async/map");
 const meow = require('meow');
 const path = require('path');
-const readability = require('retext-readability');
 const remark = require('remark');
 const remark2retext = require('remark-retext');
 const report = require('vfile-reporter');
 const retext = require('retext');
-const simplify = require('retext-simplify');
-const spell = require('retext-spell');
 const toString = require('nlcst-to-string');
 const toVFile = require('to-vfile');
 const visit = require('unist-util-visit');
+
+const equality = require('retext-equality');
+const concise = require('retext-intensify');
+const control = require('remark-message-control');
+const spell = require('retext-spell');
+const lint = require('remark-lint');
 const googGuide = require('retext-google-styleguide');
 const validateLinks = require('remark-validate-links');
 const validateExternalLinks = require('remark-lint-no-dead-urls');
@@ -32,6 +31,8 @@ const syntaxURLS = require('retext-syntax-urls');
 const repeatedWords = require('retext-repeated-words');
 const indefiniteArticles = require('retext-indefinite-article');
 const assuming = require('retext-assuming');
+const readability = require('retext-readability');
+const simplify = require('retext-simplify');
 
 // writeGood modules
 const writeGood = require('remark-lint-write-good');
@@ -401,8 +402,11 @@ map(docFiles, toVFile.read, function (err, files) {
       })
 
       .use(remark2retext, retext() // Convert markdown to plain text
+        // TODO: configure readability thresholds to make it useful
         // .use(readability, readabilityConfig || {})
-        // .use(simplify, {ignore: ignoreWords || []})
+        .use(simplify, {
+          ignore: ignoreWords || []
+        })
         // .use(equality, {ignore: ignoreWords || []})
         // .use(concise, {ignore: ignoreWords || []})
         .use(syntaxURLS)
