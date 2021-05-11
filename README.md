@@ -14,3 +14,9 @@ This tool uses [`retext`](https://github.com/wooorm/retext) to check the quality
 - [`retext-spell`](https://github.com/wooorm/retext-spell) checks spelling against a US English dictionary and [custom dictionary](#custom-dictionary).
 - [`write-good`](https://github.com/btford/write-good)
 - [`remark-validate-links`](https://github.com/remarkjs/remark-validate-links) validates that Markdown links and images reference existing local files and headings.
+- [`remark-lint-no-dead-urls`](https://github.com/remarkjs/remark-validate-links) ensures that external URLs in your Markdown are alive.
+- [`retext-google-styleguide`](https://github.com/gaurav-nelson/retext-google-styleguide) 
+
+
+To Do
+- use `remark-lint-no-dead-urls` to validate external links while ignoring example URLs
