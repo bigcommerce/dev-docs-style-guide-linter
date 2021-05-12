@@ -5,7 +5,6 @@ Apifier/M
 AWS/M
 Browserify/M
 BrowserSync/M
-BigCommerce
 CDN/S
 CSS
 CircleCI/M
@@ -113,3 +112,4 @@ webhook/S
 webpack/M
 wildcard/S
 PHP
+WGAC

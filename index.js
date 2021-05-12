@@ -19,6 +19,7 @@ const toString = require('nlcst-to-string');
 const toVFile = require('to-vfile');
 const visit = require('unist-util-visit');
 
+// remark and retext plugins
 const equality = require('retext-equality');
 const concise = require('retext-intensify');
 const control = require('remark-message-control');
@@ -44,6 +45,7 @@ const ellipses = require('./modules/ellipses.js');
 const emdash = require('./modules/emdash.js');
 const exclamation = require('./modules/exclamation.js');
 const general = require('./modules/general.js');
+const glossery = require('./modules/glossery.js');
 
 
 const cli = meow(`
@@ -368,7 +370,6 @@ map(docFiles, toVFile.read, function (err, files) {
     remark()
       // TODO: fix MD lint rules
       // .use(linterRules)
-
       .use(validateLinks, {})
       .use(validateExternalLinks, {
         skipLocalhost: true,
@@ -377,13 +378,12 @@ map(docFiles, toVFile.read, function (err, files) {
         //   baseUrl: 'https//developer.bigcommerce.com'
         // }
       })
-      // TODO: import all writeGood modules at once
-      // TODO: is visit working with remark-lint-write-good?      
-      .use(writeGood, {
-        checks: genderBias
-      })
+      // TODO: consolidate some writeGood modules
       .use(writeGood, {
         checks: firstPerson
+      })
+      .use(writeGood, {
+        checks: writeGoodExtension
       })
       .use(writeGood, {
         checks: dateFormat
@@ -398,49 +398,31 @@ map(docFiles, toVFile.read, function (err, files) {
         checks: exclamation
       })
       .use(writeGood, {
+        checks: glossery
+      })
+      .use(writeGood, {
         checks: general
       })
-
       .use(remark2retext, retext() // Convert markdown to plain text
         // TODO: configure readability thresholds to make it useful
         // .use(readability, readabilityConfig || {})
-        .use(simplify, {
-          ignore: ignoreWords || []
+        // .use(simplify, {
+        //   ignore: ignoreWords || []
+        // })
+        .use(equality, {
+          ignore: ignoreWords && ["just"]
         })
-        // .use(equality, {ignore: ignoreWords || []})
-        // .use(concise, {ignore: ignoreWords || []})
+        // .use(concise, {
+        //   ignore: ignoreWords || []
+        // })
         .use(syntaxURLS)
         .use(repeatedWords)
         .use(indefiniteArticles)
         .use(assuming, {
           ignore: ignoreWords || []
         })
-        // .use(function () {
-        //   return function (tree) {
-        //     visit(tree, 'WordNode', function (node, index, parent) {
-        //       var word = toString(node);
-        //       var unitArr = config.units || ['GB', 'MB', 'KB', 'K', 'am', 'pm', 'in', 'ft'];
-        //       unitArr = unitArr.concat(['-', 'x']); // Add ranges and dimensions to RegExp
-        //       var units = unitArr.join('|');
-        //       // Ignore email addresses and the following types of non-words:
-        //       // 500GB, 8am-6pm, 10-11am, 1024x768, 3x5in, etc
-        //       var unitFilter = new RegExp('^\\d+(' + units + ')+\\d*(' + units + ')*$', 'i');
-        //       var emailFilter = new RegExp('^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$', 'i');
-        //       // Ignore URLs:
-        //       var urlFilter = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
-        //       if (emailFilter.test(word) || unitFilter.test(word) || urlFilter.test(word)) {
-        //         parent.children[index] = {
-        //           type: 'SourceNode',
-        //           value: word,
-        //           position: node.position
-        //         };
-        //       }
-
-        //     });
-        //   };
-        // })
         .use(googGuide, {
-          ignore: ignoreWords || []
+          ignore: ignoreWords && ["he", "with"]
         })
         .use(spell, {
           dictionary: dictionary,

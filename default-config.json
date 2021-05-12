@@ -1,5 +1,5 @@
 {
-  "dictionaries": ["en_US-tech-industry.dic"],
+  "dictionaries": ["en_US-tech-industry.dic", "bigcommerce.dic"],
   "rules": {
     "blockquote-indentation": {
       "severity": "fatal"
@@ -106,7 +106,7 @@
       "severity": "fatal"
     },
     "retext-equality": {
-      "severity": "fatal"
+      "severity": "warning"
     },
     "retext-readability": {
       "age": 18,

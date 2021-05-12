@@ -1,67 +1,53 @@
-# Introduction to Deep Linking bigcommerce
-
+# Evaluating Color Contrast
 <div class="otp" id="no-index">
 
 ### On this page
-
-- [Introduction to Deep Linking bigcommerce](#introduction-to-deep-linking-bigcommerce)
+- [Evaluating Color Contrast](#evaluating-color-contrast)
     - [On this page](#on-this-page)
-  - [Overview](#overview)
-  - [Implementation](#implementation)
-  - [URL decoding code samples](#url-decoding-code-samples)
-
+    - [Prerequisites](#prerequisites)
+  - [Performing a manual review](#performing-a-manual-review)
+  - [Using an automatic testing tool](#using-an-automatic-testing-tool)
+  - [Related resources](#related-resources)
+    - [Color Contrast Checkers](#color-contrast-checkers)
+    - [Resources](#resources)
 </div>
 
-## Overview
+Color contrast is the difference between background and foreground content. The colors need to provide maximum contrast so anyone with a vision deficiency can successfully view page information. Color contrast is important for accessibility because it helps people with color blindness, low vision, low contrast vision, and color vision deficiency.
 
-Deep links for for airmen make it possible to just create URLs that send users to a particular page within an app. By sending users directly to the desired location or content, you can create a more personalized experience and improve the way users interact with your app. When navigating within the app, the browser URL is updated based on the page being viewed, making it possible to discover, bookmark, and share particular pages of the app. 
+This tutorial will walk you through the steps of evaluating color contrast for your site. Evaluating your site should include performing a manual review and using an automatic testing tool. 
 
-Deep linking enables developers to effectively communicate with the app users when the app is not open. For example, you can include a deep link in your emails, dashboard, or mobile app notifications to direct viewers to a specific location within the app.
+### Prerequisites
+You should be familiar with the [WCAG guidelines](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) on contrast and color requirements.
 
-a 8-hour 
+## Performing a manual review
+Perform a manual review to examine the use of color on your website visually. Ensure the following:
 
-Users who do not have the isnt app installed on their devices will be redirected to the [App Marketplace](/appps) to download the app before navigating to a particular location within the app.
+* Text and images are not difficult to read.
+* You do not use color as the only visual means of conveying information.
+* There is no color but black text on white background.
 
-## Implementation
+## Using an automatic testing tool
 
+It is important to verify your findings with an automatic testing tool. There are different tools and techniques to evaluate contrast. This tutorial uses the [color contrast accessibility validator](https://color.a11y.com). A list of other color contrast checkers is in [Related resources](#related-resources). Instructions for using the color contrast accessibility validator are below.
 
+1. Go to https://color.a11y.com.
+2. Enter your webpage address and click **Check Contrast**. The tool automatically identifies the contrast ratio and compares it to the standard. 
+3. Fix any color contrast issues to satisfy your desired compliance level.
 
-Deep linking can be implemented by using the `deep_link` query parameter which is passed to the load endpoint whenever the app is loaded. 
+    - Click **Test Colors** to change a color-pair contrast.
+    - Enter a hex code or pick a color using the eyedropper tool for the background color. 
+    - Enter a hex code or pick a color using the eyedropper for the foreground color.
 
-The `deep_link` query parameter is appended to the app's load callback indicating that a user is trying to access a particular page (other than the index page) within the app.
+4. Continue testing the color contrast until it passes your desired compliance level.
 
-For example, let's say you have an app with an index page of `/manage/app/123` and a load callback URL of https://app-123.myapp.com/load.
+![color-pair](https://raw.githubusercontent.com/bigcommerce/dev-docs/master/assets/images/color-contrast-01.png "color-pair")
 
-When you navigate to a page within the app, like `/manage/app/123/some/page`, everything after the app's index page URL is passed into the load endpoint in the form of a `deep_link` query string. In this case, `/some/page` is transformed into `deep_link=%some%page`.
+## Related resources
 
-[link](https://app-123.myapp.com/load?deep_link=%2Fsome%2Fpage)
+### Color Contrast Checkers
+- [WebAIM Color Contrast Checker](https://webaim.org/articles/contrast/evaluating#contrastchecker)  
+- [Colour contrast analyser (CCA)](https://www.tpgi.com/color-contrast-checker/)
+- [Google Lighthouse](https://developers.google.com/web/tools/lighthouse/)
 
-Developers can then retrieve the query string value by checking for the `deep_link` key on the server side, decoding it, and directing the user to the appropriate location within the app.
-
-Because this feature is optional, if an app does not explicitly support deep links, users are routed to the app's index page.
-
-<div class="HubBlock--callout">
-<div class="CalloutBlock--info">
-<div class="HubBlock-content">
-
-> ### Note
-> * The URL query string may include a relative URL. 
-> * The values will always be URL-encoded. You will need to decode the values to take advantage of this feature.
-
-</div>
-</div>
-</div>
-
-## URL decoding code samples
-
-enpoint@example.com
-
-The `deep_link` query parameter is automatically appended to your app's load endpoint. Because its value is URL-encoded, you need to decode it to read the value server-side. 
-
-The following code samples illustrate how to correctly decode a URL using different programming languages.
-
-**JavaScript example**
-
-**PHP example**
-
-**Python example**
+### Resources
+- [The Basics and Importance of Color Contrast for Web Accessibility](https://www.boia.org/blog/the-basics-and-importance-of-color-contrast-for-web-accessibility)
