@@ -422,13 +422,13 @@ map(docFiles, toVFile.read, function (err, files) {
           ignore: ignoreWords || []
         })
         .use(googGuide, {
-          ignore: ignoreWords && ["he", "with"]
+          ignore: ignoreWords && ["he", "with", "review"]
         })
-        .use(spell, {
-          dictionary: dictionary,
-          ignore: ignoreWords || [],
-          ignoreLiteral: true
-        })
+        // .use(spell, {
+        //   dictionary: dictionary,
+        //   ignore: ignoreWords || [],
+        //   ignoreLiteral: true
+        // })
       )
       // plugin to enable, disable, and ignore messages.
       .use(control, {

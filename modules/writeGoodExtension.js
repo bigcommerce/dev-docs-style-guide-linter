@@ -18,10 +18,10 @@ module.exports = {
   //   fn: adverbWhere,
   //   explanation: 'can weaken meaning'
   // },
-  tooWordy: {
-    fn: tooWordy,
-    explanation: 'is wordy or unneeded'
-  },
+  // tooWordy: {
+  //   fn: tooWordy,
+  //   explanation: 'is wordy or unneeded'
+  // },
   cliches: {
     fn: noCliches,
     explanation: 'is a cliche'
