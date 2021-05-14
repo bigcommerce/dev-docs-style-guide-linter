@@ -410,7 +410,7 @@ map(docFiles, toVFile.read, function (err, files) {
         //   ignore: ignoreWords || []
         // })
         .use(equality, {
-          ignore: ignoreWords && ["just"]
+          ignore: ignoreWords && ["just", "easy"]
         })
         // .use(concise, {
         //   ignore: ignoreWords || []
@@ -421,9 +421,9 @@ map(docFiles, toVFile.read, function (err, files) {
         .use(assuming, {
           ignore: ignoreWords || []
         })
-        .use(googGuide, {
-          ignore: ignoreWords && ["he", "with", "review"]
-        })
+        // .use(googGuide, {
+        //   ignore: ignoreWords && ["he", "with", "review"]
+        // })
         // .use(spell, {
         //   dictionary: dictionary,
         //   ignore: ignoreWords || [],
