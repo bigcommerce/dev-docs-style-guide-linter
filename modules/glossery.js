@@ -526,7 +526,7 @@ module.exports = {
     },
     as: {
         fn: function (text) {
-            var positives = ["as"];
+            var positives = ["\\bas\\b"];
             var re = new RegExp(positives.join('|'), 'gi');
             var suggestions = [];
             while (match = re.exec(text)) {
@@ -944,21 +944,21 @@ module.exports = {
         },
         explanation: 'In most cases, you can omit *drop-down* in favor of *list* or *menu.* If the omission results in ambiguity, then include *drop-down* as a modifier.'
     },
-    eg: {
-        fn: function (text) {
-            var positives = ["e.g."];
-            var re = new RegExp(positives.join('|'), 'gi');
-            var suggestions = [];
-            while (match = re.exec(text)) {
-                suggestions.push({
-                    index: match.index,
-                    offset: match[0].length,
-                });
-            }
-            return suggestions;
-        },
-        explanation: 'Don\'t use. Instead, use phrases like *for example* or *such as.* Too many people mix up *e.g.* and *i.e.*'
-    },
+    // eg: {
+    //     fn: function (text) {
+    //         var positives = ["e.g."];
+    //         var re = new RegExp(positives.join('|'), 'gi');
+    //         var suggestions = [];
+    //         while (match = re.exec(text)) {
+    //             suggestions.push({
+    //                 index: match.index,
+    //                 offset: match[0].length,
+    //             });
+    //         }
+    //         return suggestions;
+    //     },
+    //     explanation: 'Don\'t use. Instead, use phrases like *for example* or *such as.* Too many people mix up *e.g.* and *i.e.*'
+    // },
     endpoint: {
         fn: function (text) {
             var positives = ["end point"];
@@ -1199,21 +1199,21 @@ module.exports = {
         },
         explanation: 'Don\'t use. Instead use *hold the pointer over.*'
     },
-    ie: {
-        fn: function (text) {
-            var positives = ["\\bi\.e\.", "\\bie\\b"];
-            var re = new RegExp(positives.join('|'), 'gi');
-            var suggestions = [];
-            while (match = re.exec(text)) {
-                suggestions.push({
-                    index: match.index,
-                    offset: match[0].length,
-                });
-            }
-            return suggestions;
-        },
-        explanation: `Don\'t use. Instead, use phrases like *that is*. Too many people mix up *e.g.* and *i.e.*`
-    },
+    // ie: {
+    //     fn: function (text) {
+    //         var positives = ["\\bi\.e\.", "\\bie\\b"];
+    //         var re = new RegExp(positives.join('|'), 'gi');
+    //         var suggestions = [];
+    //         while (match = re.exec(text)) {
+    //             suggestions.push({
+    //                 index: match.index,
+    //                 offset: match[0].length,
+    //             });
+    //         }
+    //         return suggestions;
+    //     },
+    //     explanation: `Don\'t use. Instead, use phrases like *that is*. Too many people mix up *e.g.* and *i.e.*`
+    // },
     inOrderTo: {
         fn: function (text) {
             var positives = ["in order to"];
