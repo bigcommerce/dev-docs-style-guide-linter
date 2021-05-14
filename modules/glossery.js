@@ -1546,8 +1546,8 @@ module.exports = {
     },
     ok: {
         fn: function (text) {
-            var positives = ["ok", "Okay"];
-            var re = new RegExp(positives.join('|'), 'gi');
+            var positives = ["\\bok\\b", "\\bOkay\\b"];
+            var re = new RegExp(positives.join('|'), 'g');
             var suggestions = [];
             while (match = re.exec(text)) {
                 suggestions.push({
