@@ -410,7 +410,7 @@ map(docFiles, toVFile.read, function (err, files) {
         //   ignore: ignoreWords || []
         // })
         .use(equality, {
-          ignore: ignoreWords && ["just"]
+          ignore: ignoreWords && ["just", "easy"]
         })
         // .use(concise, {
         //   ignore: ignoreWords || []
