@@ -12,7 +12,7 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'In general, spell out the names of months and days of the week in full. Give the full four-digit year, not a two-digit abbreviation. Use July 31, 2016 format. https://developers.google.com/style/dates-times'
+    explanation: 'In general, spell out the names of months and days of the week in full. Give the full four-digit year, not a two-digit abbreviation. Use July 31, 2016 format. [Google Style Guide](https://developers.google.com/style/dates-times)'
   },
   dateFormat: {
     fn: function (text) {
@@ -27,6 +27,6 @@ module.exports = {
 
       return suggestions;
     },
-    explanation: 'In general, spell out the names of months and days of the week in full. Give the full four-digit year, not a two-digit abbreviation. Use July 31, 2016 format. https://developers.google.com/style/dates-times'
+    explanation: 'In general, spell out the names of months and days of the week in full. Give the full four-digit year, not a two-digit abbreviation. Use July 31, 2016 format. [Google Style Guide](https://developers.google.com/style/dates-times)'
   }
 }
