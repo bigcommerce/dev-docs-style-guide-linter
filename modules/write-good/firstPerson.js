@@ -1,7 +1,7 @@
 module.exports = {
   firstPerson: {
     fn: function (text) {
-      var positives = ["(?:^|\\s)I\\s","(?:^|\\s)I,\\s","\\bI'm\\b","\\bme\\b","\\bmy\\b","\\bmine\\b"];
+      var positives = ["(?:^|\\s)I\\s", "(?:^|\\s)I,\\s", "\\bI'm\\b", "\\bme\\b", "\\bmy\\b", "\\bmine\\b"];
       var re = new RegExp(positives.join('|'), 'gi');
       var suggestions = [];
       while (match = re.exec(text)) {
@@ -13,6 +13,6 @@ module.exports = {
 
       return suggestions;
     },
-    explanation: 'Try not to use first-person language'
+    explanation: 'Try not to use first-person language. [Google Style Guide](https://developers.google.com/style/person?hl=en)'
   }
 }

@@ -11,6 +11,6 @@ module.exports = {
             }
             return suggestions;
         },
-        explanation: 'Don\'t put a space before or after an em dash. https://developers.google.com/style/dashes'
+        explanation: 'Don\'t put a space before or after an em dash. [Google Style Guide](https://developers.google.com/style/dashes)'
     }
 }

@@ -11,6 +11,6 @@ module.exports = {
             }
             return suggestions;
         },
-        explanation: 'In general, don\'t use an ellipsis. https://developers.google.com/style/ellipses'
+        explanation: 'In general, don\'t use an ellipsis. [Google Style Guide](https://developers.google.com/style/ellipses)'
     }
 }

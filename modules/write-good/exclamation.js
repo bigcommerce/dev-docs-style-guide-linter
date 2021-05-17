@@ -11,6 +11,6 @@ module.exports = {
             }
             return suggestions;
         },
-        explanation: 'Don\'t use exclamation points in text except when they\'re part of a code example. https://developers.google.com/style/exclamation-points'
+        explanation: 'Don\'t use exclamation points in text except when they\'re part of a code example. [Google Style Guide](https://developers.google.com/style/exclamation-points)'
     }
 }

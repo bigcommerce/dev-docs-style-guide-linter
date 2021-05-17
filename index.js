@@ -404,10 +404,12 @@ map(docFiles, toVFile.read, function (err, files) {
       .use(remark2retext, retext() // Convert markdown to plain text
         // TODO: configure readability thresholds to make it useful
         // .use(readability, readabilityConfig || {})
-        .use(simplify, {
-          ignore: ignoreWords || []
-        })
+        // TODO: configure simplify to be less sensitive
+        // .use(simplify, {
+        //   ignore: ignoreWords || ["render"]
+        // })
         .use(writeGoodWordNode, {
+          whitelist: ['as'],
           checks: glossery
         })
         .use(equality, {

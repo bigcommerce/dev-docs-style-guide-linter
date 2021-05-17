@@ -524,21 +524,21 @@ module.exports = {
         },
         explanation: 'Avoid using *and so on* whenever possible.'
     },
-    as: {
-        fn: function (text) {
-            var positives = ["\\bas\\b"];
-            var re = new RegExp(positives.join('|'), 'gi');
-            var suggestions = [];
-            while (match = re.exec(text)) {
-                suggestions.push({
-                    index: match.index,
-                    offset: match[0].length,
-                });
-            }
-            return suggestions;
-        },
-        explanation: 'If you mean *because,* then use *because* instead of *as.* *As* is ambiguous; it can refer to the passage of time. *Because* refers to causation or the reason for something.'
-    },
+    // as: {
+    //     fn: function (text) {
+    //         var positives = ["\\bas\\b"];
+    //         var re = new RegExp(positives.join('|'), 'gi');
+    //         var suggestions = [];
+    //         while (match = re.exec(text)) {
+    //             suggestions.push({
+    //                 index: match.index,
+    //                 offset: match[0].length,
+    //             });
+    //         }
+    //         return suggestions;
+    //     },
+    //     explanation: 'If you mean *because,* then use *because* instead of *as.* *As* is ambiguous; it can refer to the passage of time. *Because* refers to causation or the reason for something.'
+    // },
     autopopulate: {
         fn: function (text) {
             var positives = ["auto populate", "auto-populate"];
@@ -1797,7 +1797,7 @@ module.exports = {
             }
             return suggestions;
         },
-        explanation: 'Generally avoid.\n\nBecause *should* is ambiguous by definition, it can be problematic. For example, if you\'re telling the reader what to do, *should* implies that the action is recommended but optional, leaving the reader unsure about what to do.\n\nClarify what you mean. Determine if an action is *required* versus *optional*, an outcome is *expected* versus *possible*, or a state is *actual* versus *recommended*.'
+        explanation: 'Generally avoid. Because *should* is ambiguous by definition, it can be problematic. For example, if you\'re telling the reader what to do, *should* implies that the action is recommended but optional, leaving the reader unsure about what to do. Clarify what you mean. Determine if an action is *required* versus *optional*, an outcome is *expected* versus *possible*, or a state is *actual* versus *recommended*.'
     },
     signInTo: {
         fn: function (text) {
@@ -2264,21 +2264,21 @@ module.exports = {
         },
         explanation: 'Don\'t use. Instead, use a word like *want* or *need*.'
     },
-    with: {
-        fn: function (text) {
-            var positives = ["\\bwith\\b"];
-            var re = new RegExp(positives.join('|'), 'gi');
-            var suggestions = [];
-            while (match = re.exec(text)) {
-                suggestions.push({
-                    index: match.index,
-                    offset: match[0].length,
-                });
-            }
-            return suggestions;
-        },
-        explanation: 'Don\'t use *with* when expressing ownership:\n**Recommended:** A handset that has 2 GB of RAM.\n**Not recommended:** A handset with 2 GB of RAM.\n\nDon\'t use *with* when expressing use:\n**Recommended:** Use the debugging tool to debug.\n**Not recommended:** Debug this tool with the debugging tool.'
-    },
+    // with: {
+    //     fn: function (text) {
+    //         var positives = ["\\bwith\\b"];
+    //         var re = new RegExp(positives.join('|'), 'gi');
+    //         var suggestions = [];
+    //         while (match = re.exec(text)) {
+    //             suggestions.push({
+    //                 index: match.index,
+    //                 offset: match[0].length,
+    //             });
+    //         }
+    //         return suggestions;
+    //     },
+    //     explanation: 'Don\'t use *with* when expressing ownership:\n**Recommended:** A handset that has 2 GB of RAM.\n**Not recommended:** A handset with 2 GB of RAM.\n\nDon\'t use *with* when expressing use:\n**Recommended:** Use the debugging tool to debug.\n**Not recommended:** Debug this tool with the debugging tool.'
+    // },
 
 
 }

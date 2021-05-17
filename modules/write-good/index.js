@@ -20,7 +20,6 @@ function astProcessor(ast, file, options) {
 
         const newLines = findNewlines(text);
         writeGood(text, options).forEach(suggestion => {
-            console.log(text)
             let startLineOffset = 0;
             let endLineOffset = 0;
             let lastLinebreakBeforEnd = 0;
