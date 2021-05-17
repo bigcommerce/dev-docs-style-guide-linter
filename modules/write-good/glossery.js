@@ -16,7 +16,7 @@ module.exports = {
     },
     bigcommerce: {
         fn: function (text) {
-            var positives = ["Big Commerce"];
+            var positives = ["Big Commerce", "bigcommerce", "big commerce"];
             var re = new RegExp(positives.join('|'), 'g');
             var suggestions = [];
             while (match = re.exec(text)) {

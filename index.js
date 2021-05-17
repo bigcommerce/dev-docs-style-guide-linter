@@ -36,16 +36,17 @@ const readability = require('retext-readability');
 const simplify = require('retext-simplify');
 
 // writeGood modules
+const writeGoodWordNode = require('./modules/write-good/index.js');
 const writeGood = require('remark-lint-write-good');
-const writeGoodExtension = require('./modules/writeGoodExtension.js');
-const firstPerson = require('./modules/firstPerson.js');
-const genderBias = require('./modules/genderBias.js');
-const dateFormat = require('./modules/dateFormat.js');
-const ellipses = require('./modules/ellipses.js');
-const emdash = require('./modules/emdash.js');
-const exclamation = require('./modules/exclamation.js');
-const general = require('./modules/general.js');
-const glossery = require('./modules/glossery.js');
+const writeGoodExtension = require('./modules/write-good/writeGoodExtension.js');
+const firstPerson = require('./modules/write-good/firstPerson.js');
+const genderBias = require('./modules/write-good/genderBias.js');
+const dateFormat = require('./modules/write-good/dateFormat.js');
+const ellipses = require('./modules/write-good/ellipses.js');
+const emdash = require('./modules/write-good/emdash.js');
+const exclamation = require('./modules/write-good/exclamation.js');
+const general = require('./modules/write-good/general.js');
+const glossery = require('./modules/write-good/glossery.js');
 
 
 const cli = meow(`
@@ -378,13 +379,6 @@ map(docFiles, toVFile.read, function (err, files) {
         //   baseUrl: 'https//developer.bigcommerce.com'
         // }
       })
-      // TODO: consolidate some writeGood modules
-      .use(writeGood, {
-        checks: firstPerson
-      })
-      .use(writeGood, {
-        checks: writeGoodExtension
-      })
       .use(writeGood, {
         checks: dateFormat
       })
@@ -398,24 +392,31 @@ map(docFiles, toVFile.read, function (err, files) {
         checks: exclamation
       })
       .use(writeGood, {
-        checks: glossery
-      })
-      .use(writeGood, {
         checks: general
       })
+      .use(writeGood, {
+        checks: firstPerson
+      })
+      .use(writeGood, {
+        checks: writeGoodExtension
+      })
+      // TODO: consolidate some writeGood modules
       .use(remark2retext, retext() // Convert markdown to plain text
         // TODO: configure readability thresholds to make it useful
         // .use(readability, readabilityConfig || {})
-        // .use(simplify, {
-        //   ignore: ignoreWords || []
-        // })
+        .use(simplify, {
+          ignore: ignoreWords || []
+        })
+        .use(writeGoodWordNode, {
+          checks: glossery
+        })
         .use(equality, {
           ignore: ignoreWords && ["just", "easy"]
         })
+        .use(syntaxURLS)
         // .use(concise, {
         //   ignore: ignoreWords || []
         // })
-        .use(syntaxURLS)
         .use(repeatedWords)
         .use(indefiniteArticles)
         .use(assuming, {
@@ -435,7 +436,7 @@ map(docFiles, toVFile.read, function (err, files) {
         name: 'quality-docs',
         source: [
           'remark-lint',
-          'remark-line-write-good',
+          'remark-lint-write-good',
           'retext-readability',
           'retext-simplify',
           'retext-equality',
