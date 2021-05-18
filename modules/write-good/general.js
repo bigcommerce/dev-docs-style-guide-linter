@@ -154,7 +154,7 @@ module.exports = {
             }
             return suggestions;
         },
-        explanation: 'Try to avoid using first-person plural. [Google Style Guide](https://developers.google.com/style/pronouns#personal-pronouns)'
+        explanation: 'Try to avoid using first-person plural unless using *we* to refer to your organization, after using your organization\'s name. [Google Style Guide](https://developers.google.com/style/pronouns#personal-pronouns)'
     },
     futureTense: {
         fn: function (text) {
