@@ -1,4 +1,4 @@
-# `quality-docs-fork`
+# `dev-docs-style-guide-linter`
 
 Fork of [`Quality Docs`](https://github.com/sparkartgroup/quality-docs), a CLI tool to check the quality of writing in your project's markdown or plain text documentation.
 
