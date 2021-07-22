@@ -5,16 +5,20 @@ const writeGood = require('write-good');
 
 function astProcessor(ast, file, options) {
 
-    visit(ast, ["WordNode"], (node, _, parent) => {
+    visit(ast, ["SentenceNode"], (node, _, parent) => {
+
+        // if (node.children.some(e => e.type === 'SourceNode')) {
+        //     return visit.SKIP;
+        // }
         if (node.type === 'blockquote') {
             return visit.SKIP;
         }
         let text = "";
         try {
-            text = toString(node);
+            pretext = toString(node);
+            // removes portions of strings that are between two backticks
+            text = pretext.replace(/`(?:[^`])*`/g, '');
         } catch (e) {
-            // There seem to be situations where paragraphs contain children
-            // without a children property. See #4 for details.
             return;
         }
 
