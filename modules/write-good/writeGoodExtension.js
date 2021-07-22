@@ -3,6 +3,7 @@ const passiveVoice = require('passive-voice');
 // const adverbWhere = require('adverb-where');
 const tooWordy = require('too-wordy');
 const noCliches = require('no-cliches');
+// const testGloss = require('./testGloss.js');
 // const ePrime = require('e-prime');
 
 module.exports = {
@@ -12,7 +13,7 @@ module.exports = {
   // },
   passive: {
     fn: passiveVoice,
-    explanation: 'may be passive voice'
+    explanation: 'may be passive voice',
   },
   // adverb: {
   //   fn: adverbWhere,
@@ -24,10 +25,10 @@ module.exports = {
   // },
   cliches: {
     fn: noCliches,
-    explanation: 'is a cliche'
+    explanation: 'is a cliche',
   },
   // eprime: {
   //   fn: ePrime,
   //   explanation: 'is a form of \'to be\''
-  // }
-}
+  // },
+};

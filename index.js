@@ -25,7 +25,6 @@ const concise = require('retext-intensify');
 const control = require('remark-message-control');
 const spell = require('retext-spell');
 const lint = require('remark-lint');
-const googGuide = require('retext-google-styleguide');
 const validateLinks = require('remark-validate-links');
 const validateExternalLinks = require('remark-lint-no-dead-urls');
 const syntaxURLS = require('retext-syntax-urls');
@@ -340,8 +339,6 @@ var readabilityConfig = config.rules['retext-readability'];
 
 var ignoreWords = _.difference(config.ignore, config.noIgnore);
 
-// console.log(ignoreWords)
-
 if (cli.flags.verbose) {
   console.log(chalk.red.underline('Fatal rules:\n'), chalk.red(fatalRules));
   console.log(chalk.yellow.underline('Warnings:\n'), chalk.yellow(warnRules));
@@ -413,7 +410,7 @@ map(docFiles, toVFile.read, function (err, files) {
           checks: glossery
         })
         .use(equality, {
-          ignore: ignoreWords && ["just", "easy"]
+          ignore: ignoreWords && ["just", "easy", "disable", "disabled", "host"]
         })
         .use(syntaxURLS)
         // .use(concise, {
@@ -424,9 +421,6 @@ map(docFiles, toVFile.read, function (err, files) {
         .use(assuming, {
           ignore: ignoreWords || []
         })
-        // .use(googGuide, {
-        //   ignore: ignoreWords && ["he", "with", "review"]
-        // })
         // .use(spell, {
         //   dictionary: dictionary,
         //   ignore: ignoreWords || [],
