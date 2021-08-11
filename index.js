@@ -8,7 +8,7 @@ const fs = require('fs');
 // const lint = require('remark-lint-maximum-line-length');
 // const lint = require('remark-cli');
 // const lint = require('remark-preset-lint-markdown-style-guide');
-const map = require("async/map");
+const map = require('async/map');
 const meow = require('meow');
 const path = require('path');
 const remark = require('remark');
@@ -47,8 +47,8 @@ const exclamation = require('./modules/write-good/exclamation.js');
 const general = require('./modules/write-good/general.js');
 const glossery = require('./modules/write-good/glossery.js');
 
-
-const cli = meow(`
+const cli = meow(
+  `
     Usage
       $ quality-docs <glob>
 
@@ -60,14 +60,16 @@ const cli = meow(`
 
     Examples
       $ quality-docs --config custom-config.json
-`, {
-  alias: {
-    c: 'config',
-    i: 'ignore',
-    s: 'silent',
-    v: 'verbose'
+`,
+  {
+    alias: {
+      c: 'config',
+      i: 'ignore',
+      s: 'silent',
+      v: 'verbose',
+    },
   }
-});
+);
 
 var silent = cli.flags.silent || false;
 
@@ -90,7 +92,6 @@ defaultConfig.dictionaries.forEach((dictPath, index, arr) => {
   arr[index] = path.join(__dirname, dictPath);
 });
 
-
 if (!cli.flags.config) {
   config = defaultConfig;
 } else {
@@ -103,14 +104,28 @@ if (!cli.flags.config) {
     if (isValidString && isUnique) {
       customConfig.ignore.push(cli.flags.ignore);
       customConfig.ignore.sort();
-      fs.writeFile(cli.flags.rules, JSON.stringify(rules, null, 2), function (err) {
-        if (err) {
-          return console.log(err);
+      fs.writeFile(
+        cli.flags.rules,
+        JSON.stringify(rules, null, 2),
+        function (err) {
+          if (err) {
+            return console.log(err);
+          }
+          console.log(
+            "Added '" +
+              cli.flags.ignore +
+              "' to ignore list. Don't forget to commit the changes to " +
+              cli.flags.config +
+              '.'
+          );
         }
-        console.log('Added \'' + cli.flags.ignore + '\' to ignore list. Don\'t forget to commit the changes to ' + cli.flags.config + '.');
-      });
+      );
     } else {
-      console.log('Could not add \'' + cli.flags.ignore + '\' to ignore list. Please add it manually.');
+      console.log(
+        "Could not add '" +
+          cli.flags.ignore +
+          "' to ignore list. Please add it manually."
+      );
     }
   }
 
@@ -137,7 +152,6 @@ if (!cli.flags.config) {
       return _.uniq(objValue.concat(srcValue));
     }
   });
-
 }
 
 var dictionary = en_US;
@@ -146,7 +160,7 @@ var myReadFile = function (dictPath, cb) {
   fs.readFile(dictPath, function (err, buffer) {
     cb(err, !err && buffer);
   });
-}
+};
 
 if (config.dictionaries && config.dictionaries.length >= 1) {
   dictionary = function (cb) {
@@ -154,13 +168,16 @@ if (config.dictionaries && config.dictionaries.length >= 1) {
       map(config.dictionaries, myReadFile, function (err, results) {
         results.unshift(primary.dic);
         var combinedDictionaries = Buffer.concat(results);
-        cb(err, !err && {
-          aff: primary.aff,
-          dic: combinedDictionaries
-        });
+        cb(
+          err,
+          !err && {
+            aff: primary.aff,
+            dic: combinedDictionaries,
+          }
+        );
       });
     });
-  }
+  };
 }
 
 var lintRules = _.mapValues(config.rules, (value) => {
@@ -174,22 +191,27 @@ var lintRules = _.mapValues(config.rules, (value) => {
     }
     return newValue;
   }
-  console.log(value)
+  console.log(value);
   return value;
 });
 
+var fatalRules = _.keys(
+  _.pickBy(config.rules, function (value) {
+    return value.severity == 'fatal';
+  })
+);
 
-var fatalRules = _.keys(_.pickBy(config.rules, function (value) {
-  return value.severity == 'fatal';
-}));
+var warnRules = _.keys(
+  _.pickBy(config.rules, function (value) {
+    return value && (value.severity == 'warn' || !value.severity);
+  })
+);
 
-var warnRules = _.keys(_.pickBy(config.rules, function (value) {
-  return (value && (value.severity == 'warn' || !value.severity));
-}));
-
-var suggestRules = _.keys(_.pickBy(config.rules, function (value) {
-  return value.severity == 'suggest';
-}));
+var suggestRules = _.keys(
+  _.pickBy(config.rules, function (value) {
+    return value.severity == 'suggest';
+  })
+);
 
 const linterRules = [
   require('remark-lint'),
@@ -283,9 +305,12 @@ const linterRules = [
 
   // http://www.cirosantilli.com/markdown-style-guide/#code-blocks
   [require('remark-lint-code-block-style'), 'fenced'],
-  [require('remark-lint-fenced-code-flag'), {
-    allowEmpty: false
-  }],
+  [
+    require('remark-lint-fenced-code-flag'),
+    {
+      allowEmpty: false,
+    },
+  ],
   [require('remark-lint-fenced-code-marker'), '`'],
 
   // http://www.cirosantilli.com/markdown-style-guide/#horizontal-rules
@@ -329,7 +354,7 @@ const linterRules = [
   require('remark-lint-no-literal-urls'),
 
   // http://www.cirosantilli.com/markdown-style-guide/#content-of-automatic-links
-  require('remark-lint-no-auto-link-without-protocol')
+  require('remark-lint-no-auto-link-without-protocol'),
 
   // http://www.cirosantilli.com/markdown-style-guide/#email-automatic-links.
   // Not checked.)
@@ -350,9 +375,11 @@ map(docFiles, toVFile.read, function (err, files) {
   var hasErrors = false;
 
   map(files, checkFile, function (err, results) {
-    console.log(report(err || results, {
-      silent: silent
-    }));
+    console.log(
+      report(err || results, {
+        silent: silent,
+      })
+    );
 
     // Check for errors and exit with error code if found
     results.forEach((result) => {
@@ -361,8 +388,7 @@ map(docFiles, toVFile.read, function (err, files) {
       });
     });
     if (hasErrors) process.exit(1);
-
-  })
+  });
 
   function checkFile(file, cb) {
     remark()
@@ -376,51 +402,59 @@ map(docFiles, toVFile.read, function (err, files) {
         //   baseUrl: 'https//developer.bigcommerce.com'
         // }
       })
-      .use(writeGood, {
-        checks: dateFormat
-      })
-      .use(writeGood, {
-        checks: ellipses
-      })
-      .use(writeGood, {
-        checks: emdash
-      })
-      .use(writeGood, {
-        checks: exclamation
-      })
-      .use(writeGood, {
-        checks: general
-      })
-      .use(writeGood, {
-        checks: firstPerson
-      })
-      .use(writeGood, {
-        checks: writeGoodExtension
-      })
+      // .use(writeGood, {
+      //   checks: dateFormat
+      // })
+      // .use(writeGood, {
+      //   checks: ellipses
+      // })
+      // .use(writeGood, {
+      //   checks: emdash
+      // })
+      // .use(writeGood, {
+      //   checks: exclamation
+      // })
+      // .use(writeGood, {
+      //   checks: general
+      // })
+      // .use(writeGood, {
+      //   checks: firstPerson
+      // })
+      // .use(writeGood, {
+      //   checks: writeGoodExtension
+      // })
       // TODO: consolidate some writeGood modules
-      .use(remark2retext, retext() // Convert markdown to plain text
-        // TODO: configure readability thresholds to make it useful
-        // .use(readability, readabilityConfig || {})
-        // TODO: configure simplify to be less sensitive
-        // .use(simplify, {
-        //   ignore: ignoreWords || ["render"]
-        // })
-        .use(writeGoodWordNode, {
-          whitelist: ['as'],
-          checks: glossery
-        })
-        .use(equality, {
-          ignore: ignoreWords && ["just", "easy", "disable", "disabled", "host"]
-        })
-        .use(syntaxURLS)
-        // .use(concise, {
-        //   ignore: ignoreWords || []
-        // })
-        .use(repeatedWords)
-        .use(indefiniteArticles)
-        .use(assuming, {
-          ignore: ignoreWords || []
-        })
+      .use(
+        remark2retext,
+        retext() // Convert markdown to plain text
+          // TODO: configure readability thresholds to make it useful
+          // .use(readability, readabilityConfig || {})
+          // TODO: configure simplify to be less sensitive
+          // .use(simplify, {
+          //   ignore: ignoreWords || ["render"]
+          // })
+          // .use(writeGoodWordNode, {
+          //   whitelist: ['as'],
+          //   checks: glossery
+          // })
+          .use(equality, {
+            ignore: ignoreWords && [
+              'just',
+              'easy',
+              'disable',
+              'disabled',
+              'host',
+            ],
+          })
+          .use(syntaxURLS)
+          // .use(concise, {
+          //   ignore: ignoreWords || []
+          // })
+          .use(repeatedWords)
+          .use(indefiniteArticles)
+          .use(assuming, {
+            ignore: ignoreWords || [],
+          })
         // .use(spell, {
         //   dictionary: dictionary,
         //   ignore: ignoreWords || [],
@@ -437,8 +471,8 @@ map(docFiles, toVFile.read, function (err, files) {
           'retext-simplify',
           'retext-equality',
           'retext-intensify',
-          'retext-google-styleguide'
-        ]
+          'retext-google-styleguide',
+        ],
       })
       .process(file, function (err, results) {
         var filteredMessages = [];
@@ -449,9 +483,12 @@ map(docFiles, toVFile.read, function (err, files) {
           var hasSuggestedSource = _.includes(suggestRules, message.source);
 
           if (suggestRules && (hasSuggestedRuleId || hasSuggestedSource)) {
-            message.message = message.message.replace(/don\’t use “(.*)”/ig, (match, word) => {
-              return 'Use “' + word + '” sparingly';
-            });
+            message.message = message.message.replace(
+              /don\’t use “(.*)”/gi,
+              (match, word) => {
+                return 'Use “' + word + '” sparingly';
+              }
+            );
             delete message.fatal;
           }
 
