@@ -397,10 +397,11 @@ map(docFiles, toVFile.read, function (err, files) {
       .use(validateLinks, {})
       .use(validateExternalLinks, {
         skipLocalhost: true,
+        skipUrls: ['https://github.com'],
         // TODO: set base URL and skip MD table of contents
         // gotOptions: {
-        //   baseUrl: 'https//developer.bigcommerce.com'
-        // }
+        //   baseUrl: 'https//developer.bigcommerce.com',
+        // },
       })
       // .use(writeGood, {
       //   checks: dateFormat
