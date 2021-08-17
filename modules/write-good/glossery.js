@@ -4,7 +4,6 @@ module.exports = {
       var positives = [';(?=(?:[^`]*`[^`]*`)*[^`]*$)'];
       var suggestions = [];
       var re = new RegExp(positives.join('|'), 'g');
-      console.log(re);
       while ((match = re.exec(text))) {
         suggestions.push({
           index: match.index,
@@ -48,7 +47,6 @@ module.exports = {
   },
   blueprint: {
     fn: function (text) {
-      // console.log(text)
       var positives = ['Blueprint Themes', 'Blueprint-based themes'];
       var re = new RegExp(positives.join('|'), 'gi');
       var suggestions = [];
@@ -756,7 +754,6 @@ module.exports = {
       var re = /(?<=^|\s|$)cli(?=^|\s|$)/gi;
       var suggestions = [];
       while ((match = re.exec(text))) {
-        console.log(match);
         suggestions.push({
           index: match.index,
           offset: match[0].length,
@@ -2307,22 +2304,22 @@ module.exports = {
     },
     explanation: '*whitespace*; not *white space*',
   },
-  will: {
-    fn: function (text) {
-      var positives = ['\\bwill\\b', 'would'];
-      var re = new RegExp(positives.join('|'), 'gi');
-      var suggestions = [];
-      while ((match = re.exec(text))) {
-        suggestions.push({
-          index: match.index,
-          offset: match[0].length,
-        });
-      }
-      return suggestions;
-    },
-    explanation:
-      'Avoid. Applies equally to its past tense, *would*. See also [Present tense](https://developers.google.com/style/tense) and [Documenting future features](https://developers.google.com/style/future).',
-  },
+  // will: {
+  //   fn: function (text) {
+  //     var positives = ['\\bwill\\b', 'would'];
+  //     var re = new RegExp(positives.join('|'), 'gi');
+  //     var suggestions = [];
+  //     while ((match = re.exec(text))) {
+  //       suggestions.push({
+  //         index: match.index,
+  //         offset: match[0].length,
+  //       });
+  //     }
+  //     return suggestions;
+  //   },
+  //   explanation:
+  //     'Avoid. Applies equally to its past tense, *would*. See also [Present tense](https://developers.google.com/style/tense) and [Documenting future features](https://developers.google.com/style/future).',
+  // },
   wifi: {
     fn: function (text) {
       var positives = ['wifi', 'WiFi'];

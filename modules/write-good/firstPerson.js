@@ -10,7 +10,6 @@ module.exports = {
         '\\bmine\\b',
       ];
       var re = new RegExp(positives.join('|'), 'gi');
-      console.log(re);
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({

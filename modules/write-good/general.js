@@ -125,6 +125,7 @@ module.exports = {
       var positives = ['\\d+(?:B|kB|MB|GB|TB)', '\\d+(?:ns|ms|s|min|h|d)'];
       var suggestions = [];
       var re = new RegExp(positives.join('|'), 'gi');
+      console.log(re);
       while ((match = re.exec(text))) {
         suggestions.push({
           index: match.index,
@@ -151,20 +152,20 @@ module.exports = {
   //     },
   //     explanation: 'Try to avoid using first-person plural unless using *we* to refer to your organization, after using your organization\'s name. [Google Style Guide](https://developers.google.com/style/pronouns#personal-pronouns)'
   // },
-  futureTense: {
-    fn: function (text) {
-      var positives = ['will'];
-      var suggestions = [];
-      var re = new RegExp(positives.join('|'), 'gi');
-      while ((match = re.exec(text))) {
-        suggestions.push({
-          index: match.index,
-          offset: match[0].length,
-        });
-      }
-      return suggestions;
-    },
-    explanation:
-      "Avoid 'will' and the future tense. [Google Style Guide](https://developers.google.com/style/tense)",
-  },
+  // futureTense: {
+  //   fn: function (text) {
+  //     var positives = ['will'];
+  //     var suggestions = [];
+  //     var re = new RegExp(positives.join('|'), 'gi');
+  //     while ((match = re.exec(text))) {
+  //       suggestions.push({
+  //         index: match.index,
+  //         offset: match[0].length,
+  //       });
+  //     }
+  //     return suggestions;
+  //   },
+  //   explanation:
+  //     "Avoid 'will' and the future tense. [Google Style Guide](https://developers.google.com/style/tense)",
+  // },
 };

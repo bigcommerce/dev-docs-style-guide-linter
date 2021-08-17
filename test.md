@@ -1,100 +1,185 @@
-# Styling Templates
+# Managing Carts
 
 <div class="otp" id="no-index">
-	
+
 ### On this page
-- [Styling Templates](#styling-templates)
-    - [On this page](#on-this-page)
-  - [Localizing strings displayed on the storefront](#localizing-strings-displayed-on-the-storefront)
-  - [Styling checkout](#styling-checkout)
-    - [Hide WordPress admin bar for customers](#hide-wordpress-admin-bar-for-customers)
+
+- [Managing Carts](#managing-carts)
+		- [On this page](#on-this-page)
+	- [Creating a cart](#creating-a-cart)
+		- [Guest cart](#guest-cart)
+	- [Redirecting to checkout](#redirecting-to-checkout)
+		- [Creating a redirect using the include query parameter](#creating-a-redirect-using-the-include-query-parameter)
+		- [Logging in and redirecting a customer](#logging-in-and-redirecting-a-customer)
+	- [Deleting a line item](#deleting-a-line-item)
+	- [Clearing the cart](#clearing-the-cart)
+	- [Next steps](#next-steps)
+	- [Resources](#resources)
 
 </div>
 
-## Localizing strings displayed on the storefront
+In this section, we will explain how to use the Carts API to create and manage carts. Additionally, we will discuss how to redirect shoppers from a headless storefront to the BigCommerce hosted cart and checkout pages.
 
-You can localize the language used by BC4WP to display messages on your storefront. The array `$js_i18n_array` defined in `src/BigCommerce/Assets/Theme/JS_Localization.php:19` contains all strings used by `assets/js/dist/scripts.js` to display messages on the frontend.
+## Creating a cart
 
-```php
-$js_i18n_array = [
-			'operations' => [
-				'query_string_separator' => __( '&', 'bigcommerce' ),
-			],
-			'cart'       => [
-				'items_url_param'          => '/items/',
-				'mini_url_param'           => '/mini/',
-				'quantity_param'           => 'quantity',
-				'message_empty'            => __( 'Your cart is empty.', 'bigcommerce' ),
-				'continue_shopping_label'  => esc_html( $empty_cart_data[ Cart_Empty::LINK_TEXT ] ),
-				'continue_shopping_url'    => esc_url( $empty_cart_data[ Cart_Empty::LINK ] ),
-				'cart_error_502'           => __( 'There was an error with your request. Please try again.', 'bigcommerce' ),
-				'add_to_cart_error_502'    => __( 'There was an error adding this product to your cart. It might be out of stock or unavailable.', 'bigcommerce' ),
-				'ajax_add_to_cart_error'   => __( 'There was an error adding this product to your cart.', 'bigcommerce' ),
-				'ajax_add_to_cart_success' => __( 'Product successfully added to your cart.', 'bigcommerce' ),
-				'mini_cart_loading'        => __( 'Loading', 'bigcommerce' ),
-				'shipping_calc_error'      => __( 'There was an error calculating your shipping cost. Please try again.', 'bigcommerce' ),
-			],
-			'account'    => [
-				'confirm_delete_message' => __( 'Are you sure you want to delete this address?', 'bigcommerce' ),
-				'confirm_delete_address' => __( 'Confirm', 'bigcommerce' ),
-				'cancel_delete_address'  => __( 'Cancel', 'bigcommerce' ),
-			],
-			'errors'     => [
-				'pagination_error'         => __( 'There was an error processing your request. Please try again.', 'bigcommerce' ),
-				'pagination_timeout_error' => __( 'The server took too long to complete this request. Please try again.', 'bigcommerce' ),
-			],
-			'pricing'    => [
-				'loading_prices' => __( 'Retrieving current pricing data...', 'bigcommerce' ),
-			],
-			'inventory'    => [
- 				'in_stock' => __( 'in Stock', 'bigcommerce' ),
- 				'out_of_stock' => __( 'Out of Stock', 'bigcommerce' ),
-			],
-			'wish_lists' => [
-				'copied' => __( 'Copied!', 'bigcommerce' ),
-				'copy_link' => __( 'Copy link', 'bigcommerce' ),
-				'copy_success' => __( 'Wish List URL copied to clipboard.', 'bigcommerce' ),
-			],
-		];
+The [Carts API](https://developer.bigcommerce.com/api-reference/store-management/carts) allows you to create carts for both existing and guest customers.
+
+To create a cart, send a `POST` request to the [Create a Cart](https://developer.bigcommerce.com/api-reference/store-management/carts/cart/createacart) endpoint.
+
+```http
+POST https://api.bigcommerce.com/stores/{store_hash}/v3/carts
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: {{ACCESS_TOKEN}}
 ```
 
-As an example of how to localize strings, let's change the message displayed to a user when they add an item to their cart. By default, the message "Product successfully added to your cart." displays. Instead, let's update that language and include a link to your store's cart.
+**Create a Cart request example**
 
-1. Using either a child theme or child plugin, declare a function named `update_add_to_cart_message()` that accepts `$js_i18n_array` as an arguement.
-2. Within `update_add_to_cart_message()`, set the new value for the `['ajax_add_to_cart_success']` key located in the nested `['cart']` array to `'Item added to cart. <a href="/cart">View Cart!</a>'`. Note that this is an example and your store's cart might have a different slug than `/cart`.
-3. Return the filtered `$js_i18n_array` array using a return statement.
-
-Your `update_add_to_cart_message()` function looks like the following:
-
-```php
-function update_add_to_cart_message( $js_i18n_array ){
-   $js_i18n_array['cart']['ajax_add_to_cart_success'] = 'Item added to cart. <a href="/cart">View Cart!</a>';
-   return $js_i18n_array;
-};
+```json
+{
+  "channel_id": 704181,
+  "line_items": [
+    {
+      "quantity": 1,
+      "product_id": 80,
+      "variant_id": 64
+    }
+  ]
+}
 ```
 
-Following the `update_add_to_cart_message` function, call the `add_filter()` function that is available through the WordPress Plugin API. `add_filter()` hooks a function or method to a specific filter action. Hook `update_add_to_cart_message()` to the `bigcommerce/js_localization` filter hook that is provided by the BC4WP plugin.
+To create a cart for an existing customer, include the `customer_id` in your `POST` request.
 
-```php
-add_filter( 'bigcommerce/js_localization', 'update_add_to_cart_message' );
+```json
+{
+  "channel_id": 704181,
+  "customer_id": 1,
+  "line_items": [
+    {
+      "quantity": 1,
+      "product_id": 80,
+      "variant_id": 64
+    }
+  ]
+}
 ```
 
-After you save the file, WordPress will now localize the modified string when an item is added to a cart by doing the following:
+[![Open in Request Runner](https://storage.googleapis.com/bigcommerce-production-dev-center/images/Open-Request-Runner.svg)](https://developer.bigcommerce.com/api-reference/store-management/carts/cart/createacart#requestrunner)
 
-1. When you apply the `bigcommerce/js_localization` filter hook, `add_filter()` invokes `update_add_to_cart_message()` and `$js_i18n_array` is passed in as an argument.
-2. Filter `$js_i18n_array` and update the value for `ajax_add_to_cart_success` to `'Ttem added to cart. <a href="/cart">View Cart!</a>'` before being returned on the following line by our return statement.
-3. `Scripts.js` displays this updated string when a user adds an item to their cart.
+<div class="HubBlock--callout">
+<div class="CalloutBlock--info">
+<div class="HubBlock-content">
 
-## Styling checkout
+> ### Note
+>
+> The `id` returned in the response will correspond to the `cart_id` required to generate a cart redirect URL.
 
-BigCommerce for WordPress offers two possible checkout experiences, depending on whether the WordPress site has an installed SSL/TLS certificate.
+</div>
+</div>
+</div>
 
-If no SSL/TLS certificate is installed, WordPress redirects shoppers to your BigCommerce checkout page to finish their transaction over a secure connection. If using the redirected checkout, visit our [Stencil documentation](https://developer.bigcommerce.com/stencil-docs/template-files/customize-stencil-checkout/optimized-one-page-checkout) to review all available options for styling the checkout page.
+### Guest cart
 
-If an SSL/TLS certificate is installed, BC4WP seamlessly embeds BigCommerce’s secure one-page checkout through an iFrame on your WordPress checkout page.
+A guest cart assumes the shopper is not a customer and is not logging in or creating an account during checkout. You can handle guest carts by displaying the cart data to the customer and then moving them to checkout using the [Checkouts API](https://developer.bigcommerce.com/api-reference/store-management/checkouts).
 
-### Hide WordPress admin bar for customers
+## Redirecting to checkout
 
-The default setup of WordPress shows an admin bar at the top of every page for every logged in user. It provides a link back to the main site, the user's name, and the ability to log out. This is reasonable for sites that are mainly content and might have additional custom actions in the bar, but for commerce-focused sites you might want to hide it.
+A cart redirect URL redirects a shopper to a BigCommerce hosted checkout page. You can generate a cart redirect URL only from a cart created using the Carts API.
 
-For a BigCommerce for WordPress child plugin that hides the bar for customers, see [BC4WP plugin](https://github.com/becomevocal/bc4wp-hide-wp-admin-bar-for-customers).
+To generate a cart redirect URL, send a `POST` request to the [Create Cart Redirect URL](https://developer.bigcommerce.com/api-reference/store-management/carts/cart-redirect-urls/createcartredirecturl) endpoint. Use the `id` returned in the [Create a Cart](https://developer.bigcommerce.com/api-reference/store-management/carts/cart/createacart) response for the `cartId` path parameter.
+
+```http
+POST https://api.bigcommerce.com/stores/{store_hash}/v3/carts/{cartId}/redirect_urls
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: {{ACCESS_TOKEN}}
+```
+
+[![Open in Request Runner](https://storage.googleapis.com/bigcommerce-production-dev-center/images/Open-Request-Runner.svg)](https://developer.bigcommerce.com/api-reference/store-management/carts/cart-redirect-urls/createcartredirecturl#requestrunner)
+
+The response will contain `cart_url` and `checkout_url` parameters - use these URLs to redirect the customer to the BigCommerce hosted cart or checkout pages. You can use the `embedded_checkout_url` with the [Checkout SDK](https://developer.bigcommerce.com/stencil-docs/customizing-checkout/checkout-sdk) to embed the BigCommerce hosted checkout into a headless site via an iFrame.
+
+```json
+{
+  "cart_url": "https://store-id30h7ohwf.mybigcommerce.com/cart.php?action=load&id=bc218c65-7a32-4ab7-8082-68730c074d02&token=aa958e2b7922035bf3339215d95d145ebd9193deb36ae847caa780aa2e003e4b",
+  "checkout_url": "https://store-id30h7ohwf.mybigcommerce.com/cart.php?action=loadInCheckout&id=bc218c65-7a32-4ab7-8082-68730c074d02&token=aa958e2b7922035bf3339215d95d145ebd9193deb36ae847caa780aa2e003e4b",
+  "embedded_checkout_url": "https://store-id30h7ohwf.mybigcommerce.com/cart.php?embedded=1&action=loadInCheckout&id=bc218c65-7a32-4ab7-8082-68730c074d02&token=aa958e2b7922035bf3339215d95d145ebd9193deb36ae847caa780aa2e003e4b"
+}
+```
+
+### Creating a redirect using the include query parameter
+
+It is possible to generate a redirect URL when creating a cart using the [Create a Cart](https://developer.bigcommerce.com/api-reference/store-management/carts/cart/createacart) endpoint by appending the `include=redirect_urls` query parameter to the request URL.
+
+```http
+POST https://api.bigcommerce.com/stores/{store_hash}/v3/carts?include=redirect_urls
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: {{ACCESS_TOKEN}}
+```
+
+### Logging in and redirecting a customer
+
+If you passed the `customer_id` in the [Create a Cart](https://developer.bigcommerce.com/api-reference/store-management/carts/cart/createacart) request, redirect the customer to the login URL first before redirecting them to the cart or checkout pages. To do so, create a customer login JWT using the same `customer_id` and set the `redirect_to` parameter to the relative path of the desired redirect URL.
+
+**Customer login JWT payload example**
+
+```js
+{
+  "iss": {{CLIENT_ID}},
+  "iat": 1535393113,
+  "jti": {{UUID}},
+  "operation": "customer_login",
+  "store_hash": {{STORE_HASH}},
+  "customer_id": {{CUSTOMER_ID}},
+  "channel_id": {{CHANNEL_ID}},
+  "redirect_to": "/cart.php?embedded=1&action=loadInCheckout&id=bc218c65-7a32-4ab7-8082-68730c074d02&token=aa958e2b7922035bf3339215d95d145ebd9193deb36ae847caa780aa2e003e4b",
+  "request_ip": "111.222.333.444"
+}
+```
+
+Use the payload to generate the customer login JWT. Then, create a customer login URL by appending the JWT to `https://{{YOUR_BIGCOMMERCE_DOMAIN}}.com/login/token/`.
+
+For example:
+
+`https://store.example.com/login/token/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ7Y2xpZW50X2lkfSIsImlhdCI6MTUzNTM5MzExMywianRpIjoie3V1aWR9Iiwib3BlcmF0aW9uIjoiY3VzdG9tZXJfbG9naW4iLCJzdG9yZV9oYXNoIjoie3N0b3JlX2hhc2h9IiwiY3VzdG9tZXJfaWQiOjJ9.J-fAtbjRFGdLsT744DhoprFEDqIfVq72HbDzrbFy6Is`
+
+The customer login JWT must include a `channel_id` property. If the `channel_id` is not included, CORS checks will fail and the checkout will not load.
+
+If you are using [Embedded Checkout](https://developer.bigcommerce.com/api-docs/storefronts/embedded-checkout/embedded-checkout-overview), pass the customer login URL to the Checkout SDK to login the customer, then redirect to checkout within the embedded checkout iFrame.
+
+## Deleting a line item
+
+To delete a line item from a cart, send a `DELETE` request to the [Delete Cart Line Item](https://developer.bigcommerce.com/api-reference/store-management/carts/cart-items/deletecartlineitem) endpoint passing in the associated `cartId` and `itemId`.
+
+```http
+DELETE https://api.bigcommerce.com/stores/{store_hash}/v3/carts/{cartId}/items/{itemId}
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: {{ACCESS_TOKEN}}
+```
+
+[![Open in Request Runner](https://storage.googleapis.com/bigcommerce-production-dev-center/images/Open-Request-Runner.svg)](https://developer.bigcommerce.com/api-reference/store-management/carts/cart-items/deletecartlineitem#requestrunner)
+
+## Clearing the cart
+
+Removing all cart items essentially deletes the cart. To clear the cart, call the [Delete a Cart](https://developer.bigcommerce.com/api-reference/store-management/carts/cart/deleteacart) endpoint.
+
+```http
+DELETE https://api.bigcommerce.com/stores/{store_hash}/v3/carts/{cartId}
+Accept: application/json
+Content-Type: application/json
+X-Auth-Token: {{ACCESS_TOKEN}}
+```
+
+[![Open in Request Runner](https://storage.googleapis.com/bigcommerce-production-dev-center/images/Open-Request-Runner.svg)](https://developer.bigcommerce.com/api-reference/store-management/carts/cart/deleteacart#requestrunner)
+
+## Next steps
+
+- [Learn how to move a cart to checkout](https://developer.bigcommerce.com/api-docs/storefronts/guide/developers-guide-headless/checkout)
+
+## Resources
+
+- [Carts API](https://developer.bigcommerce.com/api-reference/store-management/carts)
+- [Storefront Carts API](https://developer.bigcommerce.com/api-reference/storefront/carts)
+- [Persistent Cart](https://support.bigcommerce.com/s/article/Persistent-Cart)
