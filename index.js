@@ -402,27 +402,27 @@ map(docFiles, toVFile.read, function (err, files) {
         //   baseUrl: 'https//developer.bigcommerce.com'
         // }
       })
-      .use(writeGood, {
-        checks: dateFormat,
-      })
-      .use(writeGood, {
-        checks: ellipses,
-      })
-      .use(writeGood, {
-        checks: emdash,
-      })
-      .use(writeGood, {
-        checks: exclamation,
-      })
-      .use(writeGood, {
-        checks: general,
-      })
-      .use(writeGood, {
-        checks: firstPerson,
-      })
-      .use(writeGood, {
-        checks: writeGoodExtension,
-      })
+      // .use(writeGood, {
+      //   checks: dateFormat
+      // })
+      // .use(writeGood, {
+      //   checks: ellipses
+      // })
+      // .use(writeGood, {
+      //   checks: emdash
+      // })
+      // .use(writeGood, {
+      //   checks: exclamation
+      // })
+      // .use(writeGood, {
+      //   checks: general
+      // })
+      // .use(writeGood, {
+      //   checks: firstPerson
+      // })
+      // .use(writeGood, {
+      //   checks: writeGoodExtension
+      // })
       // TODO: consolidate some writeGood modules
       .use(
         remark2retext,
@@ -433,11 +433,10 @@ map(docFiles, toVFile.read, function (err, files) {
           // .use(simplify, {
           //   ignore: ignoreWords || ["render"]
           // })
-          .use(syntaxURLS)
-          .use(writeGoodWordNode, {
-            whitelist: ['as'],
-            checks: glossery,
-          })
+          // .use(writeGoodWordNode, {
+          //   whitelist: ['as'],
+          //   checks: glossery
+          // })
           .use(equality, {
             ignore: ignoreWords && [
               'just',
@@ -447,6 +446,7 @@ map(docFiles, toVFile.read, function (err, files) {
               'host',
             ],
           })
+          .use(syntaxURLS)
           // .use(concise, {
           //   ignore: ignoreWords || []
           // })
