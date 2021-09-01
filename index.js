@@ -438,15 +438,15 @@ map(docFiles, toVFile.read, function (err, files) {
           //   whitelist: ['as'],
           //   checks: glossery
           // })
-          .use(equality, {
-            ignore: ignoreWords && [
-              'just',
-              'easy',
-              'disable',
-              'disabled',
-              'host',
-            ],
-          })
+//           .use(equality, {
+//             ignore: ignoreWords && [
+//               'just',
+//               'easy',
+//               'disable',
+//               'disabled',
+//               'host',
+//             ],
+//           })
           .use(syntaxURLS)
           // .use(concise, {
           //   ignore: ignoreWords || []
