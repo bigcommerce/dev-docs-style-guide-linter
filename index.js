@@ -453,9 +453,9 @@ map(docFiles, toVFile.read, function (err, files) {
           // })
           .use(repeatedWords)
           .use(indefiniteArticles)
-          .use(assuming, {
-            ignore: ignoreWords || [],
-          })
+//           .use(assuming, {
+//             ignore: ignoreWords || [],
+//           })
         // .use(spell, {
         //   dictionary: dictionary,
         //   ignore: ignoreWords || [],
