@@ -109,7 +109,7 @@
       "severity": "warning"
     },
     "retext-readability": {
-      "age": 18,
+      "age": 19,
       "minWords": 10,
       "severity": "warning"
     },
@@ -162,6 +162,13 @@
     "submit",
     "transmit",
     "try",
-    "type"
+    "type",
+    "BigCommerce",
+    "bigcommerce",
+    "customizable",
+    "interface",
+    "can",
+    "multiple",
+    "parameters"
   ]
 }

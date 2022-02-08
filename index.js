@@ -168,6 +168,7 @@ if (config.dictionaries && config.dictionaries.length >= 1) {
       map(config.dictionaries, myReadFile, function (err, results) {
         results.unshift(primary.dic);
         var combinedDictionaries = Buffer.concat(results);
+
         cb(
           err,
           !err && {
@@ -191,7 +192,6 @@ var lintRules = _.mapValues(config.rules, (value) => {
     }
     return newValue;
   }
-  console.log(value);
   return value;
 });
 
@@ -394,35 +394,42 @@ map(docFiles, toVFile.read, function (err, files) {
     remark()
       // TODO: fix MD lint rules
       // .use(linterRules)
-      .use(validateLinks, {})
+      // .use(validateLinks, {})
       .use(validateExternalLinks, {
         skipLocalhost: true,
-        skipUrls: ['https://github.com'],
-        // TODO: set base URL and skip MD table of contents
-        // gotOptions: {
-        //   baseUrl: 'https//developer.bigcommerce.com',
-        // },
+        skipUrlPatterns: ['https://github.com', '//s3.amazonaws.com'],
+        gotOptions: {
+          baseUrl: 'https://staging--bc-devcenter.netlify.app',
+          // baseUrl: 'https://developer.bigcommerce.com',
+        },
       })
       // .use(writeGood, {
-      //   checks: dateFormat
+      //   checks: dateFormat,
+      //   whitelist: ignoreWords,
       // })
       // .use(writeGood, {
-      //   checks: ellipses
+      //   checks: ellipses,
+      //   whitelist: ignoreWords,
       // })
       // .use(writeGood, {
-      //   checks: emdash
+      //   checks: emdash,
+      //   whitelist: ignoreWords,
       // })
       // .use(writeGood, {
-      //   checks: exclamation
+      //   checks: exclamation,
+      //   whitelist: ignoreWords,
       // })
       // .use(writeGood, {
-      //   checks: general
+      //   checks: general,
+      //   whitelist: ignoreWords,
       // })
       // .use(writeGood, {
-      //   checks: firstPerson
+      //   checks: firstPerson,
+      //   whitelist: ignoreWords,
       // })
       // .use(writeGood, {
-      //   checks: writeGoodExtension
+      //   checks: writeGoodExtension,
+      //   whitelist: ignoreWords,
       // })
       // TODO: consolidate some writeGood modules
       .use(
@@ -432,34 +439,35 @@ map(docFiles, toVFile.read, function (err, files) {
           // .use(readability, readabilityConfig || {})
           // TODO: configure simplify to be less sensitive
           // .use(simplify, {
-          //   ignore: ignoreWords || ["render"]
+          //   ignore: ignoreWords.concat(['multiple', 'render', 'forward']),
           // })
           // .use(writeGoodWordNode, {
-          //   whitelist: ['as'],
-          //   checks: glossery
+          //   whitelist: ignoreWords.concat(['as']),
+          //   checks: glossery,
           // })
-//           .use(equality, {
-//             ignore: ignoreWords && [
-//               'just',
-//               'easy',
-//               'disable',
-//               'disabled',
-//               'host',
-//             ],
-//           })
+          // .use(equality, {
+          //   ignore: ignoreWords.concat([
+          //     'just',
+          //     'easy',
+          //     'disable',
+          //     'disabled',
+          //     'host',
+          //   ]),
+          // })
           .use(syntaxURLS)
-          // .use(concise, {
-          //   ignore: ignoreWords || []
-          // })
-          .use(repeatedWords)
-          .use(indefiniteArticles)
-          .use(assuming, {
-            ignore: ignoreWords || [],
-          })
+        // .use(concise, {
+        //   ignore: ignoreWords.concat([]),
+        // })
+        // .use(repeatedWords)
+        // .use(indefiniteArticles)
+        // .use(assuming, {
+        //   ignore: ignoreWords.concat([]),
+        // })
+        // TODO: have spell not check URLS or file names
         // .use(spell, {
         //   dictionary: dictionary,
-        //   ignore: ignoreWords || [],
-        //   ignoreLiteral: true
+        //   ignore: ignoreWords.concat([]),
+        //   ignoreLiteral: true,
         // })
       )
       // plugin to enable, disable, and ignore messages.

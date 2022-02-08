@@ -44,21 +44,21 @@ module.exports = {
     explanation:
       'Spell out all ordinal numbers in text. [Google Style Guide](https://developers.google.com/style/numbers)',
   },
-  oxfordComma: {
-    fn: function (text) {
-      var re = /\w+, [\w\s]+ (?:and|or)/gi;
-      var suggestions = [];
-      while ((match = re.exec(text))) {
-        suggestions.push({
-          index: match.index,
-          offset: match[0].length,
-        });
-      }
-      return suggestions;
-    },
-    explanation:
-      'In a series of three or more items, use a comma before the final "and" or "or". [Google Style Guide](https://developers.google.com/style/commas)',
-  },
+  // oxfordComma: {
+  //   fn: function (text) {
+  //     var re = /\w+, [\w\s]+ (?:and|or)/gi;
+  //     var suggestions = [];
+  //     while ((match = re.exec(text))) {
+  //       suggestions.push({
+  //         index: match.index,
+  //         offset: match[0].length,
+  //       });
+  //     }
+  //     return suggestions;
+  //   },
+  //   explanation:
+  //     'In a series of three or more items, use a comma before the final "and" or "or". [Google Style Guide](https://developers.google.com/style/commas)',
+  // },
   // parentheses: {
   //     fn: function (text) {
   //         var re = /\(.+\)/gi
@@ -125,7 +125,6 @@ module.exports = {
       var positives = ['\\d+(?:B|kB|MB|GB|TB)', '\\d+(?:ns|ms|s|min|h|d)'];
       var suggestions = [];
       var re = new RegExp(positives.join('|'), 'gi');
-      console.log(re);
       while ((match = re.exec(text))) {
         suggestions.push({
           index: match.index,

@@ -1,0 +1,1 @@
+In this quick start tutorial, you will create a [single-click app](/api-docs/getting-started/building-apps-bigcommerce/types-of-apps) using [Node.js](https://nodejs.org/en/), [React](https://github.com/nonsenseeeee), [Next.js](https://nextjs.org/), and [BigDesign](/big-design/).
