@@ -395,14 +395,14 @@ map(docFiles, toVFile.read, function (err, files) {
       // TODO: fix MD lint rules
       // .use(linterRules)
       // .use(validateLinks, {})
-      .use(validateExternalLinks, {
-        skipLocalhost: true,
-        skipUrlPatterns: ['https://github.com', '//s3.amazonaws.com'],
-        gotOptions: {
-          baseUrl: 'https://staging--bc-devcenter.netlify.app',
-          // baseUrl: 'https://developer.bigcommerce.com',
-        },
-      })
+      // .use(validateExternalLinks, {
+      //   skipLocalhost: true,
+      //   skipUrlPatterns: ['https://github.com', '//s3.amazonaws.com'],
+      //   gotOptions: {
+      //     baseUrl: 'https://developer-beta.bigcommerce.com',
+      //     // baseUrl: 'https://developer.bigcommerce.com',
+      //   },
+      // })
       // .use(writeGood, {
       //   checks: dateFormat,
       //   whitelist: ignoreWords,
@@ -458,17 +458,17 @@ map(docFiles, toVFile.read, function (err, files) {
         // .use(concise, {
         //   ignore: ignoreWords.concat([]),
         // })
-        // .use(repeatedWords)
-        // .use(indefiniteArticles)
+        .use(repeatedWords)
+        .use(indefiniteArticles)
         // .use(assuming, {
         //   ignore: ignoreWords.concat([]),
         // })
         // TODO: have spell not check URLS or file names
-        // .use(spell, {
-        //   dictionary: dictionary,
-        //   ignore: ignoreWords.concat([]),
-        //   ignoreLiteral: true,
-        // })
+        .use(spell, {
+          dictionary: dictionary,
+          ignore: ignoreWords.concat([]),
+          ignoreLiteral: true,
+        })
       )
       // plugin to enable, disable, and ignore messages.
       .use(control, {
