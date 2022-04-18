@@ -394,7 +394,7 @@ map(docFiles, toVFile.read, function (err, files) {
     remark()
       // TODO: fix MD lint rules
       // .use(linterRules)
-      .use(validateLinks, {})
+//       .use(validateLinks, {})
       .use(validateExternalLinks, {
         skipLocalhost: true,
         skipUrlPatterns: ['https://github.com'],
