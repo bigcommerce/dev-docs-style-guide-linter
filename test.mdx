@@ -1,0 +1,61 @@
+# App Extensions Overview
+
+App Extensions help developers extend the capabilities of the BigCommerce control panel by registering custom menu items that appear on select native control panel pages. This article is a high-level explanation of what App Extensions are and what they can do, and covers the following topics:
+
+- The App Extensions user experience
+- Registering App Extensions
+- Rendering markup from an App Extension's [load callback](/api-docs/apps/guide/callbacks#render-the-app-with-load)
+- The sources of truth for the information required to respond accurately to an App Extension [load callback](/api-docs/apps/guide/callbacks#render-the-app-with-load), including:
+  - The App Extension object
+  - The load callback's **signed_payload_jwt**
+  - Your app or an API call
+- Use cases
+
+For more detail about each attribute of the App Extension object; see the [App Extensions Glossary](/app-extensions/glossary) or the [full AppExtension object schema](/graphql-admin/reference#definition-AppExtension) in GraphQL Admin API Reference.
+
+## User experience
+
+As the preceding section says, App Extensions let you add custom menu items on select control panel pages. This section describes what that's like from the user's point of view.
+
+### Locale support
+
+App Extensions support all available control panel languages, so you can show the user app content in the language they are already using. You can register alternate link text for any [supported control panel language (Help Center)](https://support.bigcommerce.com/s/article/User-Profile#edit-profile) and handle content rendering to present markup in translation on a per-user basis, using the `user.locale` property of the [signed_payload_jwt](/api-docs/apps/guide/callbacks#data-properties-in-the-signed_payload_jwt) that accompanies BigCommerce's [load callback](/api-docs/apps/guide/callbacks#render-the-app-with-load) to your app.
+
+### Navigation
+
+When a control panel user clicks an App Extension-generated menu item, the app can either render content in a side panel - without navigating the user away from the native page - or it can redirect the user to the app's home iFrame in the **Apps** sub-menu, and render App Extension-specific content there.
+
+The following set of tabs show example pictures of the menu item and two load contexts, along with the schemas that describe them. If image diagrams are not accessible to you, use the alt text to determine which sections of the [App Extensions Glossary](/app-extensions/glossary) to read instead.
+
+### Menu item
+
+The menu item also includes one of the app images you upload as part of the app profile. A production app that uses App Extensions should have high-quality app images. You can read more about app images in the [Apps Guide](/app-extensions/guide).
+
+The following tabs show a `screffenshot` of an App Extensions menu item and the corresponding `AppExtensions` object. For more about the menu item [URL](/app-extensions/glossary#url) and [default label](/app-extensions/glossary#label), see the [App Extensions Glossary](/app-extensions/glossary).
+
+Use English for `label.defaultValue`.
+
+<Tabs items={["Screenshot of menu item", "AppExtension Schema"]}>
+  <Tab>
+    ![An `App Extension` menu item on the Orders page, with the link text highlighted. For more info, see the App Extensions Glossary.](https://storage.googleapis.com/bigcommerce-production-dev-center/images/app-extensions/orders-personal-thanks-app-extension.png)
+  </Tab>
+  <Tab>
+    ```json {5,7} filename="Store appExtension" showLineNumbers copy
+      {
+        "id": "bc/store/appExtension/2",
+        "model": "ORDERS",
+        "context": "PANEL",
+        "url": "/orders/${id}/personal-thanks", // link in your app
+        "label": {
+          "defaultValue": "Add personal thanks", // link text
+          "locales": [
+            {
+              "value": "Envie pessoal obrigado",
+              "localeCode": "pt-BR"
+            }
+          ]
+        }
+      }
+```
+  </Tab>
+</Tabs>

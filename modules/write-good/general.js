@@ -125,7 +125,6 @@ module.exports = {
       var positives = ['\\d+(?:B|kB|MB|GB|TB)', '\\d+(?:ns|ms|s|min|h|d)'];
       var suggestions = [];
       var re = new RegExp(positives.join('|'), 'gi');
-      console.log(re);
       while ((match = re.exec(text))) {
         suggestions.push({
           index: match.index,
