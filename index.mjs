@@ -43,7 +43,6 @@ import emdash from './modules/write-good/emdash.js';
 import exclamation from './modules/write-good/exclamation.js';
 import general from './modules/write-good/general.js';
 import glossery from './modules/write-good/glossery.js';
-import remarkPresetLintRecommended from 'remark-preset-lint-recommended'
 
 import setupCli from './cliSetup.mjs';
 import handleConfiguration from './handleConfiguration.mjs';
