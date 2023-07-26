@@ -80,8 +80,9 @@ function handleConfiguration(cliFlags) {
             }
         });
     }
-
     return config;
+
+
 }
 
 export default handleConfiguration;

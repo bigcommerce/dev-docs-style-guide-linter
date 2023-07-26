@@ -21,7 +21,6 @@ import visit from 'unist-util-visit';
 import _ from 'lodash';
 
 async function checkFile(file, dictionary, config, allRules, fatalRules, suggestRules) {
-    console.log(config)
     const processedFile = await remark()
         .use(function () {
             return function (tree) {

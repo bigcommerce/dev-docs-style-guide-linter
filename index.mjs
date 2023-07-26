@@ -3,7 +3,6 @@
 import _ from 'lodash';
 import minimist from 'minimist';
 import chalk from 'chalk';
-import en_US from 'dictionary-en-us';
 import fs from 'fs';
 import * as fsPromise from 'node:fs/promises';
 import { map } from 'async';
@@ -55,55 +54,73 @@ const __dirname = path.dirname(__filename);
 
 const cli = setupCli();
 const config = handleConfiguration(cli.flags);
-const dictionary = setupDictionaries(config);
+const dictionary = await setupDictionaries(config);
 const allRules = await ruleHandler(__dirname);
 const { lintRules, fatalRules, warnRules, suggestRules } = getLintRules(config);
 
-let silent = cli.flags.silent || false;
+async function processFiles() {
+    const cli = setupCli();
+    const config = handleConfiguration(cli.flags);
+    const dictionary = await setupDictionaries(config);
+    const allRules = await ruleHandler(__dirname);
+    const { lintRules, fatalRules, warnRules, suggestRules } = getLintRules(config);
 
-// Build array of files that match input glob
-let docFiles = [];
+    let silent = cli.flags.silent || false;
 
-cli.input.forEach((file) => {
-    if (!file.includes('*')) docFiles.push(file);
-});
+    // Build array of files that match input glob
+    let docFiles = [];
 
-if (docFiles.length <= 0) {
-    console.warn('No files found to lint.');
-    process.exit(1);
-}
-let readabilityConfig = config.rules['retext-readability'];
+    cli.input.forEach((file) => {
+        if (!file.includes('*')) docFiles.push(file);
+    });
 
-let ignoreWords = _.difference(config.ignore, config.noIgnore);
+    if (docFiles.length <= 0) {
+        console.warn('No files found to lint.');
+        process.exit(1);
+    }
+    let readabilityConfig = config.rules['retext-readability'];
 
-if (cli.flags.verbose) {
-    console.log(chalk.red.underline('Fatal rules:\n'), chalk.red(fatalRules));
-    console.log(chalk.yellow.underline('Warnings:\n'), chalk.yellow(warnRules));
-    console.log(chalk.gray.underline('Suggestions:\n'), chalk.gray(suggestRules));
-    console.log(chalk.green.underline('Ignoring:\n'), chalk.green(ignoreWords));
-}
+    let ignoreWords = _.difference(config.ignore, config.noIgnore);
 
+    if (cli.flags.verbose) {
+        console.log(chalk.red.underline('Fatal rules:\n'), chalk.red(fatalRules));
+        console.log(chalk.yellow.underline('Warnings:\n'), chalk.yellow(warnRules));
+        console.log(chalk.gray.underline('Suggestions:\n'), chalk.gray(suggestRules));
+        console.log(chalk.green.underline('Ignoring:\n'), chalk.green(ignoreWords));
+    }
 
-map(docFiles, toVFile.read, function (err, files) {
-    let hasErrors = false;
+    try {
+        let files = await Promise.all(docFiles.map(file => toVFile.read(file)));
+        let results = await Promise.all(files.map(file => checkFile(file)));
 
-    map(files, checkFile, function (err, results) {
         console.log(
-            report(err || results, {
+            report(results, {
                 silent: silent,
             })
         );
 
         // Check for errors and exit with error code if found
+        let hasErrors = false;
         results.forEach((result) => {
             result.messages.forEach((message) => {
                 if (message.fatal) hasErrors = true;
             });
         });
         if (hasErrors) process.exit(1);
-    });
+    } catch (error) {
+        console.error('An error occurred:', error);
+    }
+}
 
-    function checkFile(file, cb) {
+// ... the checkFile function remains the same ...
+let readabilityConfig = config.rules['retext-readability'];
+let ignoreWords = _.difference(config.ignore, config.noIgnore);
+
+
+
+async function checkFile(file) {
+
+    return new Promise((resolve, reject) => {
         remark()
             .use(function () {
                 return function (tree) {
@@ -123,7 +140,7 @@ map(docFiles, toVFile.read, function (err, files) {
                 },
             })
             .use(writeGood, {
-                checks: allRules
+                checks: ruleHandler
             })
             .use(
                 remark2retext,
@@ -174,6 +191,9 @@ map(docFiles, toVFile.read, function (err, files) {
             //     ],
             // })
             .process(file, function (err, results) {
+                if (err) {
+                    return reject(err);
+                }
                 let filteredMessages = [];
                 results.messages.forEach((message) => {
                     let hasFatalRuleId = _.includes(fatalRules, message.ruleId);
@@ -198,7 +218,18 @@ map(docFiles, toVFile.read, function (err, files) {
                     filteredMessages.push(message);
                 });
                 results.messages = filteredMessages;
-                cb(null, results);
+                resolve(results);
             });
-    }
-});
+    })
+};
+
+(async () => {
+    const cli = setupCli();
+    const config = handleConfiguration(cli.flags);
+    const dictionary = await setupDictionaries(config);
+    const allRules = await ruleHandler(__dirname);
+    const { lintRules, fatalRules, warnRules, suggestRules } = getLintRules(config);
+
+    await processFiles();
+})();
+
