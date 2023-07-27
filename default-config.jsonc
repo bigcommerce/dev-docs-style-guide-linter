@@ -1,0 +1,91 @@
+{
+  "dictionaries": [
+    "./dictionaries/en_US-tech-industry.dic",
+    "./dictionaries/bigcommerce.dic"
+  ],
+  "rules": {
+    "retext-equality": {
+      "severity": "warning",
+      "ignore": ["just", "easy", "disabled", "host"]
+    },
+    "remark-lint-no-dead-urls": {
+      "skipLocalhost": true,
+      "skipUrlPatterns": ["https://github.com"],
+      "gotOptions": {
+        "baseUrl": "https://developer.bigcommerce.com"
+      }
+    },
+    "retext-readability": {
+      "age": 18,
+      "minWords": 10,
+      "severity": "warning"
+    },
+    "retext-simplify": {
+      "severity": "warning"
+    },
+    "rule-style": {
+      "severity": "warning"
+    },
+    "retext-spell": {
+      "severity": "warning"
+    },
+    "weasel": {
+      "severity": "warning"
+    },
+    "remark-lint-write-good": {
+      "severity": "warning"
+    },
+    "retext-intensify": {
+      "severity": "warning"
+    },
+    "remark-message-control": {
+      "severity": "warning"
+    },
+    "remark-lint": {
+      "severity": "warning"
+    },
+    "remark-validate-links": {
+      "severity": "warning"
+    },
+    "retext-syntax-urls": {
+      "severity": "warning"
+    },
+    "retext-repeated-words": {
+      "severity": "warning"
+    },
+    "retext-indefinite-article": {
+      "severity": "warning"
+    },
+    "retext-assuming": {
+      "severity": "warning"
+    }
+  },
+  "ignoreGeneral": [
+    "address",
+    "with",
+    "attempt",
+    "capability",
+    "combined",
+    "contains",
+    "effect",
+    "expiration",
+    "function",
+    "host",
+    "hosts",
+    "initial",
+    "minimize",
+    "minimum",
+    "multiple",
+    "option",
+    "previous",
+    "render",
+    "request",
+    "require",
+    "requires",
+    "submit",
+    "transmit",
+    "try",
+    "type"
+    // "native"
+  ]
+}
