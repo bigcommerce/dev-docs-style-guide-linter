@@ -1,13 +1,15 @@
-// handleConfiguration.js
-
 import fs from 'fs';
 import _ from 'lodash';
 import path from 'path';
+import { parse } from 'jsonc-parser'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 function handleConfiguration(cliFlags) {
-    const defaultConfig = JSON.parse(fs.readFileSync(path.join(__dirname, 'default-config.json'), 'utf-8'));
+
+    const fileContents = fs.readFileSync(path.join(__dirname, 'default-config.jsonc'), 'utf-8');
+
+    const defaultConfig = parse(fileContents);
 
     // Use --config file if provided, otherwise defaults
     let config = {};
@@ -81,8 +83,6 @@ function handleConfiguration(cliFlags) {
         });
     }
     return config;
-
-
 }
 
 export default handleConfiguration;

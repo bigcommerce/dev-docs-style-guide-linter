@@ -40,6 +40,7 @@ async function setupDictionaries(config) {
                 throw new Error("Failed to fetch events");
             }
             const dict = data.data.linterDictionaryCollection.items;
+            // console.log(dict[0].dictionary)
             // Join the array of strings into a single string separated by newlines,
             // and convert it to a Buffer
             const dictBuffer = Buffer.from(dict[0].dictionary.join('\n'), 'utf8');

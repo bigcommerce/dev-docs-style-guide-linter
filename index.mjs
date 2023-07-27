@@ -30,6 +30,8 @@ import indefiniteArticles from 'retext-indefinite-article';
 import assuming from 'retext-assuming';
 import readability from 'retext-readability';
 import simplify from 'retext-simplify';
+import dictionaryEn from 'dictionary-en'
+import { reporterPretty } from 'vfile-reporter-pretty'
 
 import writeGoodWordNode from './modules/write-good/index.mjs';
 import writeGood from 'remark-lint-write-good';
@@ -57,13 +59,11 @@ const config = handleConfiguration(cli.flags);
 const dictionary = await setupDictionaries(config);
 const allRules = await ruleHandler(__dirname);
 const { lintRules, fatalRules, warnRules, suggestRules } = getLintRules(config);
+const ignoreWords = _.difference(config.ignoreGeneral, config.noIgnore);
+
+// linter bypasses strings inside backticks
 
 async function processFiles() {
-    const cli = setupCli();
-    const config = handleConfiguration(cli.flags);
-    const dictionary = await setupDictionaries(config);
-    const allRules = await ruleHandler(__dirname);
-    const { lintRules, fatalRules, warnRules, suggestRules } = getLintRules(config);
 
     let silent = cli.flags.silent || false;
 
@@ -78,9 +78,6 @@ async function processFiles() {
         console.warn('No files found to lint.');
         process.exit(1);
     }
-    let readabilityConfig = config.rules['retext-readability'];
-
-    let ignoreWords = _.difference(config.ignore, config.noIgnore);
 
     if (cli.flags.verbose) {
         console.log(chalk.red.underline('Fatal rules:\n'), chalk.red(fatalRules));
@@ -107,21 +104,34 @@ async function processFiles() {
             });
         });
         if (hasErrors) process.exit(1);
+        return results;
     } catch (error) {
         console.error('An error occurred:', error);
     }
 }
 
-// ... the checkFile function remains the same ...
-let readabilityConfig = config.rules['retext-readability'];
-let ignoreWords = _.difference(config.ignore, config.noIgnore);
+const readabilityConfig = config.rules['retext-readability'];
 
+function getPackageConfig(packageName) {
+    const ruleConfig = config.rules[packageName];
 
+    // Check if the rule has an ignore list
+    if (ruleConfig && ruleConfig.ignore) {
+        return {
+            ...ruleConfig,
+            ignore: config.ignoreGeneral.concat(ruleConfig.ignore)
+        };
+    }
+
+    // If no ignore list, just return the rule config as is
+    return ruleConfig;
+}
 
 async function checkFile(file) {
 
     return new Promise((resolve, reject) => {
         remark()
+            // linter bypasses strings inside backticks
             .use(function () {
                 return function (tree) {
                     visit(tree, 'inlineCode', node => {
@@ -131,46 +141,32 @@ async function checkFile(file) {
             })
             .use(remarkMdx)
             // .use(remarkPresetLintRecommended)
+            // https://github.com/remarkjs/remark-validate-links
             .use(validateLinks, {})
-            .use(validateExternalLinks, {
-                skipLocalhost: true,
-                skipUrlPatterns: ['https://github.com'],
-                gotOptions: {
-                    baseUrl: 'https//developer.bigcommerce.com',
-                },
-            })
+            .use(validateExternalLinks, config.rules['remark-lint-no-dead-urls'] || {})
             .use(writeGood, {
-                checks: ruleHandler
+                whitelist: ignoreWords || [],
+                checks: allRules
             })
             .use(
                 remark2retext,
                 retext() // Convert markdown to plain text
-                    .use(readability, readabilityConfig || {})
-                    .use(simplify, {
-                        ignore: ignoreWords || ["render"]
-                    })
-                    .use(writeGoodWordNode, {
-                        whitelist: ['as'],
-                        checks: glossery
-                    })
-                    .use(equality, {
-                        ignore: ignoreWords && [
-                            'just',
-                            'easy',
-                            'disable',
-                            'disabled',
-                            'host',
-                        ],
-                    })
+                    // classify url-like values as syntax, not natural language
                     .use(syntaxURLS)
-                    .use(intensify, {
+                    .use(readability, getPackageConfig('retext-readability'))
+                    .use(simplify, {
                         ignore: ignoreWords || []
                     })
+                    .use(writeGoodWordNode, {
+                        severity: 'suggest',
+                        whitelist: ignoreWords || [],
+                        checks: glossery
+                    })
+                    .use(equality, getPackageConfig('retext-equality'))
+                    .use(intensify, getPackageConfig('retext-intensify'))
                     .use(repeatedWords)
                     .use(indefiniteArticles)
-                    .use(assuming, {
-                        ignore: ignoreWords || [],
-                    })
+                    .use(assuming, getPackageConfig('retext-assuming'))
                     .use(spell, {
                         dictionary: dictionary,
                         ignore: ignoreWords || [],
@@ -179,9 +175,10 @@ async function checkFile(file) {
             )
             // plugin to enable, disable, and ignore messages.
             // .use(control, {
-            //     name: 'quality-docs',
+            //     name: 'linter',
             //     source: [
             //         'remark-lint',
+            //         'retext-spell',
             //         'remark-lint-write-good',
             //         'retext-readability',
             //         'retext-simplify',
@@ -196,12 +193,17 @@ async function checkFile(file) {
                 }
                 let filteredMessages = [];
                 results.messages.forEach((message) => {
+                    results.messages = filteredMessages;
                     let hasFatalRuleId = _.includes(fatalRules, message.ruleId);
                     let hasFatalSource = _.includes(fatalRules, message.source);
                     let hasSuggestedRuleId = _.includes(suggestRules, message.ruleId);
                     let hasSuggestedSource = _.includes(suggestRules, message.source);
 
+                    if (_.includes(fatalRules, message.ruleId) || _.includes(fatalRules, message.source)) {
+                        message.fatal = true;
+                    }
                     if (suggestRules && (hasSuggestedRuleId || hasSuggestedSource)) {
+                        message
                         message.message = message.message.replace(
                             /don\’t use “(.*)”/gi,
                             (match, word) => {
@@ -209,15 +211,11 @@ async function checkFile(file) {
                             }
                         );
                         delete message.fatal;
-                    }
-
-                    if (fatalRules && (hasFatalRuleId || hasFatalSource)) {
-                        message.fatal = true;
+                        // message.severity = 'suggest'; // Explicitly set severity to "suggest"
                     }
 
                     filteredMessages.push(message);
                 });
-                results.messages = filteredMessages;
                 resolve(results);
             });
     })
@@ -229,7 +227,6 @@ async function checkFile(file) {
     const dictionary = await setupDictionaries(config);
     const allRules = await ruleHandler(__dirname);
     const { lintRules, fatalRules, warnRules, suggestRules } = getLintRules(config);
-
     await processFiles();
 })();
 
