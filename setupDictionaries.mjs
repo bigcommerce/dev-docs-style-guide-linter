@@ -1,6 +1,6 @@
 // setupDictionaries.js
 
-import en_US from 'dictionary-en-us';
+import dictionaryEn from 'dictionary-en';
 import fs from 'fs';
 import { map } from 'async';
 import 'dotenv/config'
@@ -52,7 +52,7 @@ async function setupDictionaries(config) {
 
     // let extDictData = await extDictionary();
 
-    let dictionary = en_US;
+    let dictionary = dictionaryEn;
 
     let myReadFile = function (dictPath, cb) {
         fs.readFile(dictPath, function (err, buffer) {
@@ -62,7 +62,7 @@ async function setupDictionaries(config) {
 
     if (config.dictionaries && config.dictionaries.length >= 1) {
         dictionary = function (cb) {
-            en_US(function (err, primary) {
+            dictionaryEn(function (err, primary) {
                 map(config.dictionaries, myReadFile, function (err, results) {
                     results.unshift(primary.dic);
                     // Add the extDictData to the combinedDictionaries

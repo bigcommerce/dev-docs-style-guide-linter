@@ -144,29 +144,27 @@ async function checkFile(file) {
             // https://github.com/remarkjs/remark-validate-links
             .use(validateLinks, {})
             .use(validateExternalLinks, config.rules['remark-lint-no-dead-urls'] || {})
-            .use(writeGood, {
-                whitelist: ignoreWords || [],
-                checks: allRules
-            })
+            // .use(writeGood, {
+            //     whitelist: ignoreWords.concat(config.rules['remark-lint'].ignore) || [],
+            //     checks: allRules
+            // })
             .use(
                 remark2retext,
                 retext() // Convert markdown to plain text
                     // classify url-like values as syntax, not natural language
                     .use(syntaxURLS)
-                    .use(readability, getPackageConfig('retext-readability'))
-                    .use(simplify, {
-                        ignore: ignoreWords || []
-                    })
-                    .use(writeGoodWordNode, {
-                        severity: 'suggest',
-                        whitelist: ignoreWords || [],
-                        checks: glossery
-                    })
-                    .use(equality, getPackageConfig('retext-equality'))
-                    .use(intensify, getPackageConfig('retext-intensify'))
-                    .use(repeatedWords)
-                    .use(indefiniteArticles)
-                    .use(assuming, getPackageConfig('retext-assuming'))
+                    // .use(readability, getPackageConfig('retext-readability'))
+                    // .use(simplify, getPackageConfig('retext-simplify'))
+                    // .use(writeGoodWordNode, {
+                    //     severity: 'suggest',
+                    //     whitelist: ignoreWords || [],
+                    //     checks: glossery
+                    // })
+                    // .use(equality, getPackageConfig('retext-equality'))
+                    // .use(intensify, getPackageConfig('retext-intensify'))
+                    // .use(repeatedWords)
+                    // .use(indefiniteArticles)
+                    // .use(assuming, getPackageConfig('retext-assuming'))
                     .use(spell, {
                         dictionary: dictionary,
                         ignore: ignoreWords || [],

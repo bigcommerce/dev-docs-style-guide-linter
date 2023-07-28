@@ -4,6 +4,10 @@
     "./dictionaries/bigcommerce.dic"
   ],
   "rules": {
+    "remark-lint": {
+      "severity": "warning",
+      "ignore": ["however", "just"]
+    },
     "retext-equality": {
       "severity": "warning",
       "ignore": ["just", "easy", "disabled", "host"]
@@ -21,7 +25,8 @@
       "severity": "warning"
     },
     "retext-simplify": {
-      "severity": "warning"
+      "severity": "warning",
+      "ignore": ["interface", "it is"]
     },
     "rule-style": {
       "severity": "warning"
@@ -36,12 +41,10 @@
       "severity": "warning"
     },
     "retext-intensify": {
-      "severity": "warning"
+      "severity": "warning",
+      "ignore": ["should", "found", "then"]
     },
     "remark-message-control": {
-      "severity": "warning"
-    },
-    "remark-lint": {
       "severity": "warning"
     },
     "remark-validate-links": {
