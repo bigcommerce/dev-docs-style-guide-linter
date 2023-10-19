@@ -154,17 +154,17 @@ async function checkFile(file) {
                     // classify url-like values as syntax, not natural language
                     .use(syntaxURLS)
                     // .use(readability, getPackageConfig('retext-readability'))
-                    // .use(simplify, getPackageConfig('retext-simplify'))
-                    // .use(writeGoodWordNode, {
-                    //     severity: 'suggest',
-                    //     whitelist: ignoreWords || [],
-                    //     checks: glossery
-                    // })
-                    // .use(equality, getPackageConfig('retext-equality'))
+                    .use(simplify, getPackageConfig('retext-simplify'))
+                    .use(writeGoodWordNode, {
+                        severity: 'suggest',
+                        whitelist: ignoreWords || [],
+                        checks: glossery
+                    })
+                    .use(equality, getPackageConfig('retext-equality'))
                     // .use(intensify, getPackageConfig('retext-intensify'))
-                    // .use(repeatedWords)
-                    // .use(indefiniteArticles)
-                    // .use(assuming, getPackageConfig('retext-assuming'))
+                    .use(repeatedWords)
+                    .use(indefiniteArticles)
+                    .use(assuming, getPackageConfig('retext-assuming'))
                     .use(spell, {
                         dictionary: dictionary,
                         ignore: ignoreWords || [],

@@ -26,7 +26,7 @@
     },
     "retext-simplify": {
       "severity": "warning",
-      "ignore": ["interface", "it is"]
+      "ignore": ["interface", "it is", "delete"]
     },
     "rule-style": {
       "severity": "warning"
