@@ -182,29 +182,33 @@ async function checkFile(file) {
         }
         let filteredMessages = [];
         results.messages.forEach((message) => {
+          console.log(message)
           results.messages = filteredMessages;
-          let hasFatalRuleId = _.includes(fatalRules, message.ruleId);
-          let hasFatalSource = _.includes(fatalRules, message.source);
-          let hasSuggestedRuleId = _.includes(suggestRules, message.ruleId);
-          let hasSuggestedSource = _.includes(suggestRules, message.source);
+          // let hasFatalRuleId = _.includes(fatalRules, message.ruleId);
+          // let hasFatalSource = _.includes(fatalRules, message.source);
+          // let hasSuggestedRuleId = _.includes(suggestRules, message.ruleId);
+          // let hasSuggestedSource = _.includes(suggestRules, message.source);
 
-          if (
-            _.includes(fatalRules, message.ruleId) ||
-            _.includes(fatalRules, message.source)
-          ) {
-            message.fatal = true;
-          }
-          if (suggestRules && (hasSuggestedRuleId || hasSuggestedSource)) {
-            message;
-            message.message = message.message.replace(
-              /don\’t use “(.*)”/gi,
-              (match, word) => {
-                return "Use “" + word + "” sparingly";
-              },
-            );
-            delete message.fatal;
-            // message.severity = 'suggest'; // Explicitly set severity to "suggest"
-          }
+          // if (
+          //   _.includes(fatalRules, message.ruleId) ||
+          //   _.includes(fatalRules, message.source)
+          // ) {
+          //   message.fatal = true;
+          // }
+          // if (suggestRules && (hasSuggestedRuleId || hasSuggestedSource)) {
+          //   message;
+          //   message.message = message.message.replace(
+          //     /don\’t use “(.*)”/gi,
+          //     (match, word) => {
+          //       return "Use “" + word + "” sparingly";
+          //     },
+          //   );
+          //   delete message.fatal;
+          //   // message.severity = 'suggest'; // Explicitly set severity to "suggest"
+          // }
+
+          message.source = `\`${message.source}\``;
+          message.ruleId = `\`${message.ruleId}\``;
 
           filteredMessages.push(message);
         });
