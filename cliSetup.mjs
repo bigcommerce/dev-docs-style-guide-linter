@@ -1,9 +1,9 @@
 // cliSetup.js
-import meow from 'meow';
+import meow from "meow";
 
 function setupCli() {
-    const cli = meow(
-        `
+  const cli = meow(
+    `
     Usage
       $ quality-docs <glob>
 
@@ -16,18 +16,18 @@ function setupCli() {
     Examples
       $ quality-docs --config custom-config.json
 `,
-        {
-            importMeta: import.meta,
-            alias: {
-                c: 'config',
-                i: 'ignore',
-                s: 'silent',
-                v: 'verbose',
-            },
-        }
-    );
+    {
+      importMeta: import.meta,
+      alias: {
+        c: "config",
+        i: "ignore",
+        s: "silent",
+        v: "verbose",
+      },
+    },
+  );
 
-    return cli;
+  return cli;
 }
 
 export default setupCli;

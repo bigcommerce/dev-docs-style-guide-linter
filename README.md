@@ -1,4 +1,4 @@
-`node index.mjs ./docs/**/*.mdx`  
+`node index.mjs ./docs/**/*.mdx`
 
 # `dev-docs-style-guide-linter`
 
@@ -14,7 +14,7 @@ This tool uses [`retext`](https://github.com/wooorm/retext) to check the quality
   - submodules
 - [`remark-validate-links`](https://github.com/remarkjs/remark-validate-links) validates that Markdown links and images reference existing local files and headings.
 - [`remark-lint-no-dead-urls`](https://github.com/remarkjs/remark-validate-links) ensures that external URLs in your Markdown are alive.
-- [`retext-google-styleguide`](https://github.com/gaurav-nelson/retext-google-styleguide) 
+- [`retext-google-styleguide`](https://github.com/gaurav-nelson/retext-google-styleguide)
 - [`retext-syntax-urls`](https://github.com/retextjs/retext-syntax-urls) classifies url-like values (example.com, index.html, www.alpha.bravo) as syntax, not natural language.
 - [`retext-repeated-words`](https://github.com/retextjs/retext-repeated-words) check for repeated words.
   - Doesn’t warn for some words which do occur twice (the best exhibition they had had since)
@@ -24,11 +24,13 @@ This tool uses [`retext`](https://github.com/wooorm/retext) to check the quality
 - [`retext-assuming`](https://github.com/davidhund/retext-assuming) Check for unhelpful 'assuming' phrases such as 'just,' 'simply,' or 'obviously.'
 
 Not currently enabled
+
 - [`retext-readability`](https://github.com/wooorm/retext-readability) checks the reading level of the whole document.
-    - This project measures readability in text with several formulas: Dale–Chall, Automated Readability, Coleman–Liau, Flesch, Gunning fog, SMOG, and Spache.
- - [`retext-intensify`](https://github.com/wooorm/retext-intensify) warns on filler, weasel and hedge words.
- - [`retext-simplify`](https://github.com/wooorm/retext-simplify) warns on complicated phrases and checks for simpler alternatives.
- - [`remark-lint`](https://github.com/wooorm/remark-lint) checks for proper markdown formatting.
+  - This project measures readability in text with several formulas: Dale–Chall, Automated Readability, Coleman–Liau, Flesch, Gunning fog, SMOG, and Spache.
+- [`retext-intensify`](https://github.com/wooorm/retext-intensify) warns on filler, weasel and hedge words.
+- [`retext-simplify`](https://github.com/wooorm/retext-simplify) warns on complicated phrases and checks for simpler alternatives.
+- [`remark-lint`](https://github.com/wooorm/remark-lint) checks for proper markdown formatting.
 
 To Do
+
 - use `remark-lint-no-dead-urls` to validate external links while ignoring example URLs

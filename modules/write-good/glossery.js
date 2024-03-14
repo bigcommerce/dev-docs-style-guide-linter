@@ -1,9 +1,9 @@
 module.exports = {
   semicolons: {
     fn: function (text) {
-      var positives = [';(?=(?:[^`]*`[^`]*`)*[^`]*$)'];
+      var positives = [";(?=(?:[^`]*`[^`]*`)*[^`]*$)"];
       var suggestions = [];
-      var re = new RegExp(positives.join('|'), 'g');
+      var re = new RegExp(positives.join("|"), "g");
       while ((match = re.exec(text))) {
         suggestions.push({
           index: match.index,
@@ -13,12 +13,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Use semicolons judiciously. [Google Style Guide](https://developers.google.com/style/semicolons)',
+      "Use semicolons judiciously. [Google Style Guide](https://developers.google.com/style/semicolons)",
   },
   controlPanel: {
     fn: function (text) {
-      var positives = ['Control Panel'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["Control Panel"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -32,8 +32,8 @@ module.exports = {
   },
   bigcommerce: {
     fn: function (text) {
-      var positives = ['Big Commerce', 'bigcommerce', 'big commerce'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["Big Commerce", "bigcommerce", "big commerce"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -47,8 +47,8 @@ module.exports = {
   },
   blueprint: {
     fn: function (text) {
-      var positives = ['Blueprint Themes', 'Blueprint-based themes'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["Blueprint Themes", "Blueprint-based themes"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -62,8 +62,8 @@ module.exports = {
   },
   channelManager: {
     fn: function (text) {
-      var positives = ['channel manager'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["channel manager"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -77,8 +77,8 @@ module.exports = {
   },
   ecommerce: {
     fn: function (text) {
-      var positives = ['e-commerce', 'Ecommerce', 'eCommerce'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["e-commerce", "Ecommerce", "eCommerce"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -92,8 +92,8 @@ module.exports = {
   },
   community: {
     fn: function (text) {
-      var positives = ['community'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["community"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -108,12 +108,12 @@ module.exports = {
   devcenter: {
     fn: function (text) {
       var positives = [
-        'Developer Center',
-        'DevCenter',
-        'devcenter',
-        'developer center',
+        "Developer Center",
+        "DevCenter",
+        "devcenter",
+        "developer center",
       ];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -127,8 +127,8 @@ module.exports = {
   },
   frontmatter: {
     fn: function (text) {
-      var positives = ['frontmatter'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["frontmatter"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -142,8 +142,8 @@ module.exports = {
   },
   handlebars: {
     fn: function (text) {
-      var positives = ['handlebars'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["handlebars"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -158,12 +158,12 @@ module.exports = {
   permanentURL: {
     fn: function (text) {
       var positives = [
-        'temporary URL',
-        'alternate URL',
-        'canonical URL',
-        'mybigcommerce.com URL',
+        "temporary URL",
+        "alternate URL",
+        "canonical URL",
+        "mybigcommerce.com URL",
       ];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -178,8 +178,8 @@ module.exports = {
   },
   sku: {
     fn: function (text) {
-      var positives = ['sku'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["sku"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -193,8 +193,8 @@ module.exports = {
   },
   stencil: {
     fn: function (text) {
-      var positives = ['Stencil Themes', 'Stencil-based themes'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["Stencil Themes", "Stencil-based themes"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -208,8 +208,8 @@ module.exports = {
   },
   storefront: {
     fn: function (text) {
-      var positives = ['Store Front'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["Store Front"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -224,13 +224,13 @@ module.exports = {
   wordPress: {
     fn: function (text) {
       var positives = [
-        'Word Press',
-        'word press',
-        'Word press',
-        'Wordpress',
-        'wordpress',
+        "Word Press",
+        "word press",
+        "Word press",
+        "Wordpress",
+        "wordpress",
       ];
-      var re = new RegExp(positives.join('|'), 'g');
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -244,8 +244,8 @@ module.exports = {
   },
   ampersand: {
     fn: function (text) {
-      var positives = ['&'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["&"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -259,8 +259,8 @@ module.exports = {
   },
   access: {
     fn: function (text) {
-      var positives = ['access/w'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["access/w"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -275,8 +275,8 @@ module.exports = {
   },
   addin: {
     fn: function (text) {
-      var positives = ['\\baddin\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\baddin\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -290,8 +290,8 @@ module.exports = {
   },
   allowsYouTo: {
     fn: function (text) {
-      var positives = ['allows you'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["allows you"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -306,7 +306,7 @@ module.exports = {
   apis: {
     fn: function (text) {
       var positives = ["API's"];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -320,8 +320,8 @@ module.exports = {
   },
   abnormal: {
     fn: function (text) {
-      var positives = ['abnormal'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["abnormal"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -336,8 +336,8 @@ module.exports = {
   },
   abort: {
     fn: function (text) {
-      var positives = ['abort'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["abort"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -348,12 +348,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Avoid in general usage. Instead, use words like stop, exit, cancel, or end. In Linux, abort refers to a type of signal that terminates an abnormal process.',
+      "Avoid in general usage. Instead, use words like stop, exit, cancel, or end. In Linux, abort refers to a type of signal that terminates an abnormal process.",
   },
   above: {
     fn: function (text) {
-      var positives = ['above'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["above"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -367,8 +367,8 @@ module.exports = {
   },
   accountName: {
     fn: function (text) {
-      var positives = ['account name'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["account name"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -382,8 +382,8 @@ module.exports = {
   },
   actionable: {
     fn: function (text) {
-      var positives = ['actionable'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["actionable"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -398,8 +398,8 @@ module.exports = {
   },
   addOn: {
     fn: function (text) {
-      var positives = ['\\baddon\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\baddon\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -413,8 +413,8 @@ module.exports = {
   },
   addressBar: {
     fn: function (text) {
-      var positives = ['url bar', 'omnibox'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["url bar", "omnibox"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -428,8 +428,8 @@ module.exports = {
   },
   adHoc: {
     fn: function (text) {
-      var positives = ['ad hoc'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["ad hoc"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -444,8 +444,8 @@ module.exports = {
   },
   agnostic: {
     fn: function (text) {
-      var positives = ['agnostic'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["agnostic"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -460,8 +460,8 @@ module.exports = {
   },
   agnostic: {
     fn: function (text) {
-      var positives = ['agnostic'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["agnostic"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -476,8 +476,8 @@ module.exports = {
   },
   ajax: {
     fn: function (text) {
-      var positives = ['Ajax', 'ajax'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["Ajax", "ajax"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -492,8 +492,8 @@ module.exports = {
   },
   aka: {
     fn: function (text) {
-      var positives = ['aka'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["aka"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -508,8 +508,8 @@ module.exports = {
   },
   allowlist: {
     fn: function (text) {
-      var positives = ['allowlist'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["allowlist"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -524,8 +524,8 @@ module.exports = {
   },
   allowsYouTo: {
     fn: function (text) {
-      var positives = ['allows you to'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["allows you to"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -539,8 +539,8 @@ module.exports = {
   },
   alpha: {
     fn: function (text) {
-      var positives = ['Alpha'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["Alpha"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -550,12 +550,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Lowercase except when part of a product name.',
+    explanation: "Lowercase except when part of a product name.",
   },
   andSoOn: {
     fn: function (text) {
-      var positives = ['and so on'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["and so on"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -565,7 +565,7 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Avoid using *and so on* whenever possible.',
+    explanation: "Avoid using *and so on* whenever possible.",
   },
   // as: {
   //     fn: function (text) {
@@ -584,8 +584,8 @@ module.exports = {
   // },
   autopopulate: {
     fn: function (text) {
-      var positives = ['auto populate', 'auto-populate'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["auto populate", "auto-populate"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -595,12 +595,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *autopopulate* instead.',
+    explanation: "Use *autopopulate* instead.",
   },
   autoscaling: {
     fn: function (text) {
-      var positives = ['auto-scaling'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["auto-scaling"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -610,12 +610,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *autoscaling* instead.',
+    explanation: "Use *autoscaling* instead.",
   },
   autotagging: {
     fn: function (text) {
-      var positives = ['auto-tagging'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["auto-tagging"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -625,12 +625,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *autotagging* instead.',
+    explanation: "Use *autotagging* instead.",
   },
   autoupdate: {
     fn: function (text) {
-      var positives = ['autoupdate'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["autoupdate"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -644,8 +644,8 @@ module.exports = {
   },
   backend: {
     fn: function (text) {
-      var positives = ['back-end', 'back end'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["back-end", "back end"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -659,8 +659,8 @@ module.exports = {
   },
   backwardsCompatible: {
     fn: function (text) {
-      var positives = ['backwards compatible'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["backwards compatible"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -674,8 +674,8 @@ module.exports = {
   },
   below: {
     fn: function (text) {
-      var positives = ['below'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["below"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -689,8 +689,8 @@ module.exports = {
   },
   blackHat: {
     fn: function (text) {
-      var positives = ['blackhat', 'black hat', 'black-hat'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["blackhat", "black hat", "black-hat"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -705,8 +705,8 @@ module.exports = {
   },
   blind: {
     fn: function (text) {
-      var positives = ['blind'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["blind"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -717,12 +717,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Avoid using *blind to* or *blind eye to*. Instead, use more precise terms like ignore, unaware of, disregard, avoid, or reject.\nAvoid using blind writes. Instead, use a more precise phrase, such as a write operation without a read operation.\nAvoid using blind change or change blindly. Instead, use a more precise phrase such as change without first confirming the value.\nWhen referring to people, use terms like person who is blind, screen reader user (if applicable), person who is visually impaired, person who is low-vision, magnification user (if applicable).',
+      "Avoid using *blind to* or *blind eye to*. Instead, use more precise terms like ignore, unaware of, disregard, avoid, or reject.\nAvoid using blind writes. Instead, use a more precise phrase, such as a write operation without a read operation.\nAvoid using blind change or change blindly. Instead, use a more precise phrase such as change without first confirming the value.\nWhen referring to people, use terms like person who is blind, screen reader user (if applicable), person who is visually impaired, person who is low-vision, magnification user (if applicable).",
   },
   builtIn: {
     fn: function (text) {
-      var positives = ['builtsin'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["builtsin"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -736,8 +736,8 @@ module.exports = {
   },
   checkBox: {
     fn: function (text) {
-      var positives = ['check box'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["check box"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -766,8 +766,8 @@ module.exports = {
   },
   clickOn: {
     fn: function (text) {
-      var positives = ['click on'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["click on"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -778,12 +778,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Use *click* instead. When the environment is a desktop with a mouse, use click for most targets, such as buttons, links, list items, and radio buttons.',
+      "Use *click* instead. When the environment is a desktop with a mouse, use click for most targets, such as buttons, links, list items, and radio buttons.",
   },
   clickHere: {
     fn: function (text) {
-      var positives = ['click here'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["click here"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -798,8 +798,8 @@ module.exports = {
   },
   codebase: {
     fn: function (text) {
-      var positives = ['code base'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["code base"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -809,12 +809,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *codebase* instead.',
+    explanation: "Use *codebase* instead.",
   },
   comprise: {
     fn: function (text) {
-      var positives = ['comprise'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["comprise"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -829,8 +829,8 @@ module.exports = {
   },
   config: {
     fn: function (text) {
-      var positives = ['\\bconfig\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bconfig\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -845,8 +845,8 @@ module.exports = {
   },
   cons: {
     fn: function (text) {
-      var positives = ['\\bcons\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bcons\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -860,8 +860,8 @@ module.exports = {
   },
   cpu: {
     fn: function (text) {
-      var positives = ['\\bcpu\\b'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["\\bcpu\\b"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -872,12 +872,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Use *CPU* instead. All caps. No need to expand the abbreviation on first mention.',
+      "Use *CPU* instead. All caps. No need to expand the abbreviation on first mention.",
   },
   currently: {
     fn: function (text) {
-      var positives = ['currently'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["currently"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -892,8 +892,8 @@ module.exports = {
   },
   data: {
     fn: function (text) {
-      var positives = ['data are'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["data are"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -904,12 +904,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'In our usage, *data* is singular, not plural. Say the *data is,* not the *data are.* Also, in our usage, data is a mass noun, not a count noun; for example, say *less data* rather than *fewer data.*',
+      "In our usage, *data* is singular, not plural. Say the *data is,* not the *data are.* Also, in our usage, data is a mass noun, not a count noun; for example, say *less data* rather than *fewer data.*",
   },
   deepLinking: {
     fn: function (text) {
-      var positives = ['deep-linking'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["deep-linking"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -920,12 +920,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Use *deep linking* instead. However, if it would work to replace with *linking,* then do that.',
+      "Use *deep linking* instead. However, if it would work to replace with *linking,* then do that.",
   },
   desire: {
     fn: function (text) {
-      var positives = ['desire'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["desire"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -939,8 +939,8 @@ module.exports = {
   },
   disable: {
     fn: function (text) {
-      var positives = ['disable'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["disable"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -955,8 +955,8 @@ module.exports = {
   },
   documentation: {
     fn: function (text) {
-      var positives = ['\\bdoc\\b', '\\bdocs\\b', 'article', 'topic'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bdoc\\b", "\\bdocs\\b", "article", "topic"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -971,8 +971,8 @@ module.exports = {
   },
   dropdown: {
     fn: function (text) {
-      var positives = ['dropdown'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["dropdown"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -983,12 +983,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'In most cases, you can omit *drop-down* in favor of *list* or *menu.* If the omission results in ambiguity, then include *drop-down* as a modifier.',
+      "In most cases, you can omit *drop-down* in favor of *list* or *menu.* If the omission results in ambiguity, then include *drop-down* as a modifier.",
   },
   dropdown: {
     fn: function (text) {
-      var positives = ['dropdown'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["dropdown"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -999,7 +999,7 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'In most cases, you can omit *drop-down* in favor of *list* or *menu.* If the omission results in ambiguity, then include *drop-down* as a modifier.',
+      "In most cases, you can omit *drop-down* in favor of *list* or *menu.* If the omission results in ambiguity, then include *drop-down* as a modifier.",
   },
   // eg: {
   //     fn: function (text) {
@@ -1018,8 +1018,8 @@ module.exports = {
   // },
   endpoint: {
     fn: function (text) {
-      var positives = ['end point'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["end point"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1029,12 +1029,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *endpoint* instead.',
+    explanation: "Use *endpoint* instead.",
   },
   etc: {
     fn: function (text) {
-      var positives = ['\\betc'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\betc"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1045,12 +1045,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Avoid both *etc.* and and *so on* wherever possible, but if you really need to use one, use *etc.* Always include the period, even if a comma follows immediately after.',
+      "Avoid both *etc.* and and *so on* wherever possible, but if you really need to use one, use *etc.* Always include the period, even if a comma follows immediately after.",
   },
   filename: {
     fn: function (text) {
-      var positives = ['file name'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["file name"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1060,12 +1060,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *filename* instead.',
+    explanation: "Use *filename* instead.",
   },
   filesystem: {
     fn: function (text) {
-      var positives = ['file system'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["file system"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1075,12 +1075,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *filesystem* instead.',
+    explanation: "Use *filesystem* instead.",
   },
   firstClass: {
     fn: function (text) {
-      var positives = ['first-class', 'first class'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["first-class", "first class"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1095,8 +1095,8 @@ module.exports = {
   },
   forInstance: {
     fn: function (text) {
-      var positives = ['for instance'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["for instance"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1107,12 +1107,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Avoid when possible. Instead, use *for example* or *such as.*',
+      "Avoid when possible. Instead, use *for example* or *such as.*",
   },
   frontend: {
     fn: function (text) {
-      var positives = ['front-end', 'front end'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["front-end", "front end"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1122,28 +1122,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *frontend* instead.',
+    explanation: "Use *frontend* instead.",
   },
   grandfather: {
     fn: function (text) {
-      var positives = ['grandfather'];
-      var re = new RegExp(positives.join('|'), 'gi');
-      var suggestions = [];
-      while ((match = re.exec(text))) {
-        suggestions.push({
-          index: match.index,
-          offset: match[0].length,
-        });
-      }
-      return suggestions;
-    },
-    explanation:
-      "Don't use to refer to something that is allowed to violate a rule because it predates the rule. Instead, use an adjective like *legacy* or *exempt* or a verb like *made an exception.*",
-  },
-  grandfather: {
-    fn: function (text) {
-      var positives = ['grandfather'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["grandfather"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1158,8 +1142,24 @@ module.exports = {
   },
   grandfather: {
     fn: function (text) {
-      var positives = ['grandfather'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["grandfather"];
+      var re = new RegExp(positives.join("|"), "gi");
+      var suggestions = [];
+      while ((match = re.exec(text))) {
+        suggestions.push({
+          index: match.index,
+          offset: match[0].length,
+        });
+      }
+      return suggestions;
+    },
+    explanation:
+      "Don't use to refer to something that is allowed to violate a rule because it predates the rule. Instead, use an adjective like *legacy* or *exempt* or a verb like *made an exception.*",
+  },
+  grandfather: {
+    fn: function (text) {
+      var positives = ["grandfather"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1174,8 +1174,8 @@ module.exports = {
   },
   hamburger: {
     fn: function (text) {
-      var positives = ['hamburger'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["hamburger"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1190,8 +1190,8 @@ module.exports = {
   },
   hamburger: {
     fn: function (text) {
-      var positives = ['hamburger'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["hamburger"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1206,8 +1206,8 @@ module.exports = {
   },
   health: {
     fn: function (text) {
-      var positives = ['health'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["health"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1218,12 +1218,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Use with caution. When describing an action taken for a computer system, only use the term *health check* if this is the term that appears in the interface. Be certain to remove any ambiguity regarding whether the term refers to health in the medical sense.\n\nUse detailed, non-figurative language as much as possible, such as referring to a node *being responsive* instead of referring to a node *being healthy.*',
+      "Use with caution. When describing an action taken for a computer system, only use the term *health check* if this is the term that appears in the interface. Be certain to remove any ambiguity regarding whether the term refers to health in the medical sense.\n\nUse detailed, non-figurative language as much as possible, such as referring to a node *being responsive* instead of referring to a node *being healthy.*",
   },
   hit: {
     fn: function (text) {
-      var positives = ['\\bhit\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bhit\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1237,8 +1237,8 @@ module.exports = {
   },
   housekeeping: {
     fn: function (text) {
-      var positives = ['housekeeping', 'house keeping', 'house-keeping'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["housekeeping", "house keeping", "house-keeping"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1253,8 +1253,8 @@ module.exports = {
   },
   hover: {
     fn: function (text) {
-      var positives = ['\\bhover\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bhover\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1283,8 +1283,8 @@ module.exports = {
   // },
   inOrderTo: {
     fn: function (text) {
-      var positives = ['in order to'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["in order to"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1298,8 +1298,8 @@ module.exports = {
   },
   ip: {
     fn: function (text) {
-      var positives = ['\\bIP\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bIP\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1313,8 +1313,8 @@ module.exports = {
   },
   keyPair: {
     fn: function (text) {
-      var positives = ['key pair'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["key pair"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1328,8 +1328,8 @@ module.exports = {
   },
   keyPair: {
     fn: function (text) {
-      var positives = ['key pair'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["key pair"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1343,8 +1343,8 @@ module.exports = {
   },
   keyValuePair: {
     fn: function (text) {
-      var positives = ['key/value pair', 'key value pair'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["key/value pair", "key value pair"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1358,8 +1358,8 @@ module.exports = {
   },
   kill: {
     fn: function (text) {
-      var positives = ['\\bkill'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bkill"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1373,8 +1373,8 @@ module.exports = {
   },
   lame: {
     fn: function (text) {
-      var positives = ['\\blame'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\blame"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1389,7 +1389,7 @@ module.exports = {
   lets: {
     fn: function (text) {
       var positives = ["\\blet's"];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1403,8 +1403,8 @@ module.exports = {
   },
   leverage: {
     fn: function (text) {
-      var positives = ['\\bleverage'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bleverage"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1415,12 +1415,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Avoid using if you mean *use*. If possible, use a more precise term. For example, *use*, *build on*, or *take advantage of*.',
+      "Avoid using if you mean *use*. If possible, use a more precise term. For example, *use*, *build on*, or *take advantage of*.",
   },
   lifecycle: {
     fn: function (text) {
-      var positives = ['life cycle', 'life-cycle'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["life cycle", "life-cycle"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1430,12 +1430,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *lifecycle* instead.',
+    explanation: "Use *lifecycle* instead.",
   },
   lifetime: {
     fn: function (text) {
-      var positives = ['life time', 'life-time'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["life time", "life-time"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1445,12 +1445,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *lifetime* instead.',
+    explanation: "Use *lifetime* instead.",
   },
   login: {
     fn: function (text) {
-      var positives = ['login', 'log-in'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["login", "log-in"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1465,8 +1465,8 @@ module.exports = {
   },
   login: {
     fn: function (text) {
-      var positives = ['login', 'log-in'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["login", "log-in"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1481,8 +1481,8 @@ module.exports = {
   },
   markdown: {
     fn: function (text) {
-      var positives = ['markdown'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["markdown"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1497,8 +1497,8 @@ module.exports = {
   },
   markup: {
     fn: function (text) {
-      var positives = ['mark-up'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["mark-up"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1512,8 +1512,8 @@ module.exports = {
   },
   may: {
     fn: function (text) {
-      var positives = ['\\bmay\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bmay\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1524,12 +1524,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'In general, reserve for official policy or legal considerations. To convey *possibility*, use *might* instead. To convey *permission*, use *can* instead.',
+      "In general, reserve for official policy or legal considerations. To convey *possibility*, use *might* instead. To convey *permission*, use *can* instead.",
   },
   na: {
     fn: function (text) {
-      var positives = ['\\bna\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bna\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1540,12 +1540,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Use *N/A* instead. Spell out as *not available* or *not applicable* on first reference.',
+      "Use *N/A* instead. Spell out as *not available* or *not applicable* on first reference.",
   },
   nameserver: {
     fn: function (text) {
-      var positives = ['name server'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["name server"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1555,12 +1555,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *nameserver* instead.',
+    explanation: "Use *nameserver* instead.",
   },
   namespace: {
     fn: function (text) {
-      var positives = ['name space'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["name space"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1570,12 +1570,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *namespace* instead.',
+    explanation: "Use *namespace* instead.",
   },
   native: {
     fn: function (text) {
-      var positives = ['native'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["native"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1590,8 +1590,8 @@ module.exports = {
   },
   neither: {
     fn: function (text) {
-      var positives = ['neither\\s\\w\\sor'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["neither\\s\\w\\sor"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1601,12 +1601,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Say *neither A nor B*, not *neither A or B*.',
+    explanation: "Say *neither A nor B*, not *neither A or B*.",
   },
   oauth: {
     fn: function (text) {
-      var positives = ['OAuth 2', 'OAuth2', 'Oauth'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["OAuth 2", "OAuth2", "Oauth"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1616,12 +1616,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *OAuth 2.0* instead.',
+    explanation: "Use *OAuth 2.0* instead.",
   },
   ok: {
     fn: function (text) {
-      var positives = ['\\bok\\b', '\\bOkay\\b'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["\\bok\\b", "\\bOkay\\b"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1631,12 +1631,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *OK* or *okay* instead.',
+    explanation: "Use *OK* or *okay* instead.",
   },
   once: {
     fn: function (text) {
-      var positives = ['\\bonce\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bonce\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1646,12 +1646,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'If you mean *after*, then use *after* instead of *once*.',
+    explanation: "If you mean *after*, then use *after* instead of *once*.",
   },
   once: {
     fn: function (text) {
-      var positives = ['\\bonce\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bonce\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1661,12 +1661,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'If you mean *after*, then use *after* instead of *once*.',
+    explanation: "If you mean *after*, then use *after* instead of *once*.",
   },
   openSource: {
     fn: function (text) {
-      var positives = ['open-source'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["open-source"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1676,12 +1676,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *open source* instead.',
+    explanation: "Use *open source* instead.",
   },
   path: {
     fn: function (text) {
-      var positives = ['filepath', 'file path', 'pathname', 'path name'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["filepath", "file path", "pathname", "path name"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1692,12 +1692,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Use *path* instead. Avoid using *filepath*, *file path*, *pathname*, or *path name* if possible.',
+      "Use *path* instead. Avoid using *filepath*, *file path*, *pathname*, or *path name* if possible.",
   },
   please: {
     fn: function (text) {
-      var positives = ['\\bplease\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bplease\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1712,8 +1712,8 @@ module.exports = {
   },
   predefined: {
     fn: function (text) {
-      var positives = ['pre-defined'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["pre-defined"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1723,12 +1723,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *predefined* instead.',
+    explanation: "Use *predefined* instead.",
   },
   precondition: {
     fn: function (text) {
-      var positives = ['pre-condition'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["pre-condition"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1738,12 +1738,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Use *precondition* instead.',
+    explanation: "Use *precondition* instead.",
   },
   pros: {
     fn: function (text) {
-      var positives = ['\\bpros\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bpros\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1758,8 +1758,8 @@ module.exports = {
   },
   quick: {
     fn: function (text) {
-      var positives = ['quick'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["quick"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1770,12 +1770,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'What might be quick for you might not be quick for others. Try eliminating this word from the sentence because usually the same meaning can be conveyed without it.',
+      "What might be quick for you might not be quick for others. Try eliminating this word from the sentence because usually the same meaning can be conveyed without it.",
   },
   quota: {
     fn: function (text) {
-      var positives = ['quota'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["quota"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1786,12 +1786,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'In API contexts, often refers to API usage limits. Where possible, best to use a more specific term than *quota*, such as *usage limit*; the word *quota* means many different things to many different people.',
+      "In API contexts, often refers to API usage limits. Where possible, best to use a more specific term than *quota*, such as *usage limit*; the word *quota* means many different things to many different people.",
   },
   regex: {
     fn: function (text) {
-      var positives = ['regex'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["regex"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1805,8 +1805,8 @@ module.exports = {
   },
   repo: {
     fn: function (text) {
-      var positives = ['repo\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["repo\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1820,8 +1820,8 @@ module.exports = {
   },
   representationalStateTransfer: {
     fn: function (text) {
-      var positives = ['Representational State Transfer'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["Representational State Transfer"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1836,8 +1836,8 @@ module.exports = {
   },
   saas: {
     fn: function (text) {
-      var positives = ['\\bsaas\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bsaas\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1847,12 +1847,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'Write out on first mention: *software as a service (SaaS)*.',
+    explanation: "Write out on first mention: *software as a service (SaaS)*.",
   },
   scale: {
     fn: function (text) {
-      var positives = ['\\bscale\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bscale\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1867,8 +1867,8 @@ module.exports = {
   },
   should: {
     fn: function (text) {
-      var positives = ['should'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["should"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1883,8 +1883,8 @@ module.exports = {
   },
   signInTo: {
     fn: function (text) {
-      var positives = ['sign into'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["sign into"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1898,8 +1898,8 @@ module.exports = {
   },
   signout: {
     fn: function (text) {
-      var positives = ['signout'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["signout"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1910,12 +1910,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'sign-out (noun or adjective), sign out (verb); not *log out* or *signout*',
+      "sign-out (noun or adjective), sign out (verb); not *log out* or *signout*",
   },
   since: {
     fn: function (text) {
-      var positives = ['\\bsince\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bsince\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1926,12 +1926,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'If you mean *because*, then use *because* instead of *since*. *Since* is ambiguous; it can refer to the passage of time. *Because* refers to causation or the reason for something.',
+      "If you mean *because*, then use *because* instead of *since*. *Since* is ambiguous; it can refer to the passage of time. *Because* refers to causation or the reason for something.",
   },
   singlemost: {
     fn: function (text) {
-      var positives = ['singlemost'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["singlemost"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1941,12 +1941,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: 'single most; not *singlemost*',
+    explanation: "single most; not *singlemost*",
   },
   slave: {
     fn: function (text) {
-      var positives = ['\\bslave\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bslave\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1961,8 +1961,8 @@ module.exports = {
   },
   smartphone: {
     fn: function (text) {
-      var positives = ['smartphone'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["smartphone"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1977,8 +1977,8 @@ module.exports = {
   },
   spinUp: {
     fn: function (text) {
-      var positives = ['spin up'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["spin up"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -1993,8 +1993,8 @@ module.exports = {
   },
   stylesheet: {
     fn: function (text) {
-      var positives = ['stylesheet'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["stylesheet"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2005,12 +2005,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Unless used in code, use *style sheet*; not *stylesheet*. This is the official spelling, per the World Wide Web Consortium (W3C).',
+      "Unless used in code, use *style sheet*; not *stylesheet*. This is the official spelling, per the World Wide Web Consortium (W3C).",
   },
   stylesheet: {
     fn: function (text) {
-      var positives = ['stylesheet'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["stylesheet"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2021,12 +2021,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Unless used in code, use *style sheet*; not *stylesheet*. This is the official spelling, per the World Wide Web Consortium (W3C).',
+      "Unless used in code, use *style sheet*; not *stylesheet*. This is the official spelling, per the World Wide Web Consortium (W3C).",
   },
   textbox: {
     fn: function (text) {
-      var positives = ['textbox', 'text box'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["textbox", "text box"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2041,8 +2041,8 @@ module.exports = {
   },
   textbox: {
     fn: function (text) {
-      var positives = ['textbox', 'text box'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["textbox", "text box"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2057,8 +2057,8 @@ module.exports = {
   },
   uncheck: {
     fn: function (text) {
-      var positives = ['uncheck'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["uncheck"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2073,8 +2073,8 @@ module.exports = {
   },
   unselect: {
     fn: function (text) {
-      var positives = ['unselect'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["unselect"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2089,8 +2089,8 @@ module.exports = {
   },
   unarchive: {
     fn: function (text) {
-      var positives = ['unarchive', 'uncompress', 'unzip'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["unarchive", "uncompress", "unzip"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2104,8 +2104,8 @@ module.exports = {
   },
   url: {
     fn: function (text) {
-      var positives = ['\\burl'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["\\burl"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2116,12 +2116,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'All caps. Plural is *URLs*.\n\nWrite *a URL* rather than *an URL*, because the most common pronunciation starts with a consonant sound.',
+      "All caps. Plural is *URLs*.\n\nWrite *a URL* rather than *an URL*, because the most common pronunciation starts with a consonant sound.",
   },
   username: {
     fn: function (text) {
-      var positives = ['user name'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["user name"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2131,12 +2131,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: '*username*; not *user name*',
+    explanation: "*username*; not *user name*",
   },
   utilize: {
     fn: function (text) {
-      var positives = ['utilize', 'utilization'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["utilize", "utilization"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2151,8 +2151,8 @@ module.exports = {
   },
   via: {
     fn: function (text) {
-      var positives = ['\\bvia\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bvia\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2166,8 +2166,8 @@ module.exports = {
   },
   viceVersa: {
     fn: function (text) {
-      var positives = ['vice versa'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["vice versa"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2182,8 +2182,8 @@ module.exports = {
   },
   voila: {
     fn: function (text) {
-      var positives = ['voila'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["voila"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2197,8 +2197,8 @@ module.exports = {
   },
   vs: {
     fn: function (text) {
-      var positives = ['\\bvs'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bvs"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2213,8 +2213,8 @@ module.exports = {
   },
   walkthrough: {
     fn: function (text) {
-      var positives = ['walk-through'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["walk-through"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2224,12 +2224,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: '*walkthrough*; not *walk-through*',
+    explanation: "*walkthrough*; not *walk-through*",
   },
   webpage: {
     fn: function (text) {
-      var positives = ['webpage'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["webpage"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2240,12 +2240,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      '*web page*; not *webpage*. But where possible, avoid both by using *page*.',
+      "*web page*; not *webpage*. But where possible, avoid both by using *page*.",
   },
   webpage: {
     fn: function (text) {
-      var positives = ['webpage'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["webpage"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2256,12 +2256,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      '*web page*; not *webpage*. But where possible, avoid both by using *page*.',
+      "*web page*; not *webpage*. But where possible, avoid both by using *page*.",
   },
   website: {
     fn: function (text) {
-      var positives = ['web site'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["web site"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2271,12 +2271,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: '*website*; not *web site*',
+    explanation: "*website*; not *web site*",
   },
   whitelist: {
     fn: function (text) {
-      var positives = ['whitelist', 'white list', 'white-list'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["whitelist", "white list", "white-list"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2291,8 +2291,8 @@ module.exports = {
   },
   whitespace: {
     fn: function (text) {
-      var positives = ['white space'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["white space"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2302,7 +2302,7 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: '*whitespace*; not *white space*',
+    explanation: "*whitespace*; not *white space*",
   },
   // will: {
   //   fn: function (text) {
@@ -2322,8 +2322,8 @@ module.exports = {
   // },
   wifi: {
     fn: function (text) {
-      var positives = ['wifi', 'WiFi'];
-      var re = new RegExp(positives.join('|'), 'g');
+      var positives = ["wifi", "WiFi"];
+      var re = new RegExp(positives.join("|"), "g");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2334,12 +2334,12 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      '*Wi-Fi*; not *wifi* or *WiFi*. When possible, instead use *wireless*.',
+      "*Wi-Fi*; not *wifi* or *WiFi*. When possible, instead use *wireless*.",
   },
   wildcard: {
     fn: function (text) {
-      var positives = ['wild card'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["wild card"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({
@@ -2349,12 +2349,12 @@ module.exports = {
       }
       return suggestions;
     },
-    explanation: '*wildcard*; not *wild card*',
+    explanation: "*wildcard*; not *wild card*",
   },
   wish: {
     fn: function (text) {
-      var positives = ['\\bwish\\b'];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var positives = ["\\bwish\\b"];
+      var re = new RegExp(positives.join("|"), "gi");
       var suggestions = [];
       while ((match = re.exec(text))) {
         suggestions.push({

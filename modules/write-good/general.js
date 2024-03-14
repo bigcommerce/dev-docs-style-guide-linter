@@ -27,7 +27,7 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Don\'t use plurals in parentheses. If it\'s important in a specific context to indicate singular and plural, use "one or more". [Google Style Guide](https://developers.google.com/style/plurals-parentheses)',
+      "Don't use plurals in parentheses. If it's important in a specific context to indicate singular and plural, use \"one or more\". [Google Style Guide](https://developers.google.com/style/plurals-parentheses)",
   },
   ordinals: {
     fn: function (text) {
@@ -42,23 +42,23 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Spell out all ordinal numbers in text. [Google Style Guide](https://developers.google.com/style/numbers)',
+      "Spell out all ordinal numbers in text. [Google Style Guide](https://developers.google.com/style/numbers)",
   },
-  oxfordComma: {
-    fn: function (text) {
-      var re = /\w+, [\w\s]+ (?:and|or)/gi;
-      var suggestions = [];
-      while ((match = re.exec(text))) {
-        suggestions.push({
-          index: match.index,
-          offset: match[0].length,
-        });
-      }
-      return suggestions;
-    },
-    explanation:
-      'In a series of three or more items, use a comma before the final "and" or "or". [Google Style Guide](https://developers.google.com/style/commas)',
-  },
+  // oxfordComma: {
+  //   fn: function (text) {
+  //     var re = /\w+, [\w\s]+ (?:and|or)/gi;
+  //     var suggestions = [];
+  //     while ((match = re.exec(text))) {
+  //       suggestions.push({
+  //         index: match.index,
+  //         offset: match[0].length,
+  //       });
+  //     }
+  //     return suggestions;
+  //   },
+  //   explanation:
+  //     'In a series of three or more items, use a comma before the final "and" or "or". [Google Style Guide](https://developers.google.com/style/commas)',
+  // },
   // parentheses: {
   //     fn: function (text) {
   //         var re = /\(.+\)/gi
@@ -86,7 +86,7 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Commas and periods go inside quotation marks. [Google Style Guide](https://developers.google.com/style/quotation-marks)',
+      "Commas and periods go inside quotation marks. [Google Style Guide](https://developers.google.com/style/quotation-marks)",
   },
   ranges: {
     fn: function (text) {
@@ -106,9 +106,9 @@ module.exports = {
 
   spacing: {
     fn: function (text) {
-      var positives = ['[a-z][.?!] {2,}[A-Z]', '[a-z][.?!] {2,}[A-Z]'];
+      var positives = ["[a-z][.?!] {2,}[A-Z]", "[a-z][.?!] {2,}[A-Z]"];
       var suggestions = [];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var re = new RegExp(positives.join("|"), "gi");
       while ((match = re.exec(text))) {
         suggestions.push({
           index: match.index,
@@ -118,13 +118,13 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Leave only one space between sentences. [Google Style Guide](https://developers.google.com/style/sentence-spacing)',
+      "Leave only one space between sentences. [Google Style Guide](https://developers.google.com/style/sentence-spacing)",
   },
   unitesOfMeasurement: {
     fn: function (text) {
-      var positives = ['\\d+(?:B|kB|MB|GB|TB)', '\\d+(?:ns|ms|s|min|h|d)'];
+      var positives = ["\\d+(?:B|kB|MB|GB|TB)", "\\d+(?:ns|ms|s|min|h|d)"];
       var suggestions = [];
-      var re = new RegExp(positives.join('|'), 'gi');
+      var re = new RegExp(positives.join("|"), "gi");
       while ((match = re.exec(text))) {
         suggestions.push({
           index: match.index,
@@ -134,7 +134,7 @@ module.exports = {
       return suggestions;
     },
     explanation:
-      'Put a nonbreaking space between the number and the unit. [Google Style Guide](https://developers.google.com/style/units-of-measure)',
+      "Put a nonbreaking space between the number and the unit. [Google Style Guide](https://developers.google.com/style/units-of-measure)",
   },
   // personalPronouns: {
   //     fn: function (text) {

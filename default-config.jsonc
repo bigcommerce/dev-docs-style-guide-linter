@@ -10,7 +10,7 @@
     },
     "retext-equality": {
       "severity": "warning",
-      "ignore": ["just", "easy", "disabled", "host"]
+      "ignore": ["just", "easy", "disabled", "host", "special", "invalid", "simply", "obviously", "postman"]
     },
     "remark-lint-no-dead-urls": {
       "skipLocalhost": true,
@@ -21,12 +21,12 @@
     },
     "retext-readability": {
       "age": 18,
-      "minWords": 10,
+      "minWords": 15,
       "severity": "warning"
     },
     "retext-simplify": {
-      "severity": "warning",
-      "ignore": ["interface", "it is", "delete"]
+      "severity": "suggestion",
+      "ignore": ["interface", "it is", "delete", "parameters", "identify","component", "address", "allocate", "authorize", "benefit", "discontinue", "effect", "expiration", "function", "host", "hosts", "initial", "minimize", "minimum", "multiple", "option", "previous", "render", "request", "require", "requires", "submit", "transmit", "try", "type", "maximum", "purchase", "modify"]
     },
     "rule-style": {
       "severity": "warning"
@@ -42,7 +42,7 @@
     },
     "retext-intensify": {
       "severity": "warning",
-      "ignore": ["should", "found", "then"]
+      "ignore": ["should", "found", "then", "up", "started", "all"]
     },
     "remark-message-control": {
       "severity": "warning"
