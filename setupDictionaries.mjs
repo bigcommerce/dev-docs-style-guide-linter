@@ -1,9 +1,9 @@
 // setupDictionaries.js
 
-import dictionaryEn from "dictionary-en";
-import fs from "fs";
 import { map } from "async";
+import dictionaryEn from "dictionary-en";
 import "dotenv/config";
+import fs from "fs";
 
 async function setupDictionaries(config) {
   // const extDictionary = async () => {

@@ -1,8 +1,7 @@
 // ruleHandler.js
 
-import _ from "lodash";
-import path from "path";
 import * as fsPromise from "node:fs/promises";
+import path from "path";
 
 async function ruleHandler(__dirname) {
   // combines all write-good custom rules into one object

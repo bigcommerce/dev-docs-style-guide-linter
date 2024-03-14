@@ -1,7 +1,7 @@
 import fs from "fs";
+import { parse } from "jsonc-parser";
 import _ from "lodash";
 import path from "path";
-import { parse } from "jsonc-parser";
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 

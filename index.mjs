@@ -1,59 +1,37 @@
 #!/usr/bin/env node
 
-import _ from "lodash";
-import minimist from "minimist";
 import chalk from "chalk";
-import fs from "fs";
-import * as fsPromise from "node:fs/promises";
-import { map } from "async";
-import meow from "meow";
+import _ from "lodash";
 import path from "path";
-import remarkRehype from "remark-rehype";
 import remark from "remark";
 import remarkMdx from "remark-mdx";
-import remarkGfm from "remark-gfm";
-import strip from "strip-markdown";
 import remark2retext from "remark-retext";
+import strip from "strip-markdown";
 import report from "vfile-reporter";
 // import reporter from "vfile-reporter-position";
+import validateExternalLinks from "remark-lint-no-dead-urls";
+import writeGood from "remark-lint-write-good";
+import validateLinks from "remark-validate-links";
 import retext from "retext";
-import toString from "nlcst-to-string";
+import assuming from "retext-assuming";
+import equality from "retext-equality";
+import indefiniteArticles from "retext-indefinite-article";
+import readability from "retext-readability";
+import repeatedWords from "retext-repeated-words";
+import simplify from "retext-simplify";
+import spell from "retext-spell";
+import syntaxURLS from "retext-syntax-urls";
 import toVFile from "to-vfile";
 import visit from "unist-util-visit";
 import { fileURLToPath } from "url";
-import equality from "retext-equality";
-import intensify from "retext-intensify";
-import control from "remark-message-control";
-import spell from "retext-spell";
-import lint from "remark-lint";
-import validateLinks from "remark-validate-links";
-import validateExternalLinks from "remark-lint-no-dead-urls";
-import syntaxURLS from "retext-syntax-urls";
-import repeatedWords from "retext-repeated-words";
-import indefiniteArticles from "retext-indefinite-article";
-import assuming from "retext-assuming";
-import readability from "retext-readability";
-import simplify from "retext-simplify";
-import dictionaryEn from "dictionary-en";
-import { reporterPretty } from "vfile-reporter-pretty";
-
-import writeGoodWordNode from "./modules/write-good/index.mjs";
-import writeGood from "remark-lint-write-good";
-import writeGoodExtension from "./modules/write-good/writeGoodExtension.js";
-import firstPerson from "./modules/write-good/firstPerson.js";
-import genderBias from "./modules/write-good/genderBias.js";
-import dateFormat from "./modules/write-good/dateFormat.js";
-import ellipses from "./modules/write-good/ellipses.js";
-import emdash from "./modules/write-good/emdash.js";
-import exclamation from "./modules/write-good/exclamation.js";
-import general from "./modules/write-good/general.js";
 import glossery from "./modules/write-good/glossery.js";
+import writeGoodWordNode from "./modules/write-good/index.mjs";
 
 import setupCli from "./cliSetup.mjs";
-import handleConfiguration from "./handleConfiguration.mjs";
-import setupDictionaries from "./setupDictionaries.mjs";
-import ruleHandler from "./ruleHandler.mjs";
 import getLintRules from "./getLintRules.mjs";
+import handleConfiguration from "./handleConfiguration.mjs";
+import ruleHandler from "./ruleHandler.mjs";
+import setupDictionaries from "./setupDictionaries.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -98,7 +76,7 @@ async function processFiles() {
 
     console.log(
       // reporterPretty(results, {
-      reporter(results, {
+      report(results, {
         silent: silent,
       }),
     );

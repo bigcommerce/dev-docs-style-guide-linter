@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
+import toString from "nlcst-to-string";
 import { lintRule as rule } from "unified-lint-rule";
 import visit from "unist-util-visit";
-import toString from "nlcst-to-string";
 import writeGood from "write-good";
 
 function astProcessor(ast, file, options) {

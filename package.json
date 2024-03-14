@@ -66,6 +66,7 @@
   "devDependencies": {
     "jest": "^29.6.1",
     "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
     "remark-cli": "^9.0.0",
     "remark-preset-lint-recommended": "^5.0.0"
   }
