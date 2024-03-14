@@ -125,7 +125,7 @@ async function checkFile(file) {
 
   return new Promise((resolve, reject) => {
     remark()
-      .use(strip, { remove: ["inlineCode", "table"] })
+      // .use(strip, { remove: ["inlineCode", "table", "yaml"] })
       // .use(remarkIgnoreImages)
       .use(remarkMdx)
       // .use(remarkPresetLintRecommended)
