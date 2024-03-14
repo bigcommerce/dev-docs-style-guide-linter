@@ -26,7 +26,7 @@
     },
     "retext-simplify": {
       "severity": "suggestion",
-      "ignore": ["interface", "it is", "delete", "parameters", "identify","component", "address", "allocate", "authorize", "benefit", "discontinue", "effect", "expiration", "function", "host", "hosts", "initial", "minimize", "minimum", "multiple", "option", "previous", "render", "request", "require", "requires", "submit", "transmit", "try", "type", "maximum", "purchase", "modify"]
+      "ignore": ["interface", "it is", "delete", "parameters", "identify","component", "address", "allocate", "authorize", "benefit", "discontinue", "effect", "expiration", "function", "host", "hosts", "initial", "minimize", "minimum", "multiple", "option", "previous", "render", "request", "require", "requires", "submit", "transmit", "try", "type", "maximum", "purchase", "modify", "however"]
     },
     "rule-style": {
       "severity": "warning"
@@ -88,7 +88,11 @@
     "submit",
     "transmit",
     "try",
-    "type"
+    "type",
+    "read-only",
+    "modify",
+    "&",
+    "Login"
     // "native"
   ]
 }
