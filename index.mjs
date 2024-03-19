@@ -146,11 +146,11 @@ async function checkFile(file) {
           .use(syntaxURLS)
           .use(readability, getPackageConfig("retext-readability"))
           // .use(simplify, getPackageConfig("retext-simplify"))
-          .use(writeGoodWordNode, {
-            severity: "suggest",
-            whitelist: ignoreWords || [],
-            checks: glossery,
-          })
+          // .use(writeGoodWordNode, {
+          //   severity: "suggest",
+          //   whitelist: ignoreWords || [],
+          //   checks: glossery,
+          // })
           // .use(equality, getPackageConfig("retext-equality"))
           // .use(intensify, getPackageConfig('retext-intensify'))
           .use(repeatedWords)
