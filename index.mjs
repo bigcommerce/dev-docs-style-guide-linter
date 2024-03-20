@@ -182,7 +182,6 @@ async function checkFile(file) {
         }
         let filteredMessages = [];
         results.messages.forEach((message) => {
-          console.log(message)
           results.messages = filteredMessages;
           // let hasFatalRuleId = _.includes(fatalRules, message.ruleId);
           // let hasFatalSource = _.includes(fatalRules, message.source);
@@ -208,15 +207,16 @@ async function checkFile(file) {
           // }
 
           if (message.source === "retext-readability") {
-            message.message = `${message.message}  
-            This sentence is ${message.actual.split(" ").length} words long.  
+            message.message = `This sentence is ${message.actual.split(" ").length} words long.
+
             > ${message.actual}
+              
             `
               ;
           }
 
-          message.source = `|\`${message.source}\`|`;
-          message.ruleId = `|\`${message.ruleId}\`|`;
+          message.source = `|\`${message.source}\``;
+          message.ruleId = `\`${message.ruleId}\`|`;
 
           filteredMessages.push(message);
         });
