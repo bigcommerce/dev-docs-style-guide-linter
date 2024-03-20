@@ -953,22 +953,22 @@ module.exports = {
     explanation:
       "Don't use *disabled* to describe something that's broken. When describing a user action or the state of a UI element, use a more precise term where possible, like *turn off,* *inactive,* *deactivated,* or *deselect.*",
   },
-  documentation: {
-    fn: function (text) {
-      var positives = ["\\bdoc\\b", "\\bdocs\\b", "article", "topic"];
-      var re = new RegExp(positives.join("|"), "gi");
-      var suggestions = [];
-      while ((match = re.exec(text))) {
-        suggestions.push({
-          index: match.index,
-          offset: match[0].length,
-        });
-      }
-      return suggestions;
-    },
-    explanation:
-      "Within a document, use *in this document,* and not *in this article* or *in this topic.* It's okay to use *in this tutorial* or *in this codelab.*",
-  },
+  // documentation: {
+  //   fn: function (text) {
+  //     var positives = ["\\bdoc\\b", "\\bdocs\\b", "article", "topic"];
+  //     var re = new RegExp(positives.join("|"), "gi");
+  //     var suggestions = [];
+  //     while ((match = re.exec(text))) {
+  //       suggestions.push({
+  //         index: match.index,
+  //         offset: match[0].length,
+  //       });
+  //     }
+  //     return suggestions;
+  //   },
+  //   explanation:
+  //     "Within a document, use *in this document,* and not *in this article* or *in this topic.* It's okay to use *in this tutorial* or *in this codelab.*",
+  // },
   dropdown: {
     fn: function (text) {
       var positives = ["dropdown"];

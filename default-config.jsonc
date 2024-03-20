@@ -22,7 +22,7 @@
     "retext-readability": {
       "age": 18,
       "minWords": 25,
-      "severity": "warning"
+      "severity": "suggest"
     },
     "retext-simplify": {
       "severity": "suggestion",

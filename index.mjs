@@ -74,28 +74,30 @@ async function processFiles() {
     let files = await Promise.all(docFiles.map((file) => toVFile.read(file)));
     let results = await Promise.all(files.map((file) => checkFile(file)));
 
-    console.log(
-      // reporterPretty(results, {
-      report(results, {
-        silent: silent,
-      }),
-    );
+
 
     // Check for errors and exit with error code if found
     let hasErrors = false;
     results.forEach((result) => {
       result.messages.forEach((message) => {
-        if (message.fatal) hasErrors = true;
+        if (message.fatal) {
+          hasErrors = true
+        }
       });
     });
     if (hasErrors) process.exit(1);
+
+    console.log(
+      report(results, {
+        silent: silent,
+      }),
+    );
+
     return results;
   } catch (error) {
     console.error("An error occurred:", error);
   }
 }
-
-const readabilityConfig = config.rules["retext-readability"];
 
 function getPackageConfig(packageName) {
   const ruleConfig = config.rules[packageName];
@@ -182,45 +184,44 @@ async function checkFile(file) {
         }
         let filteredMessages = [];
         results.messages.forEach((message) => {
+          // console.log(message)
           results.messages = filteredMessages;
-          // let hasFatalRuleId = _.includes(fatalRules, message.ruleId);
-          // let hasFatalSource = _.includes(fatalRules, message.source);
-          // let hasSuggestedRuleId = _.includes(suggestRules, message.ruleId);
-          // let hasSuggestedSource = _.includes(suggestRules, message.source);
+          let hasFatalRuleId = _.includes(fatalRules, message.ruleId);
+          let hasFatalSource = _.includes(fatalRules, message.source);
+          let hasSuggestedRuleId = _.includes(suggestRules, message.ruleId);
+          let hasSuggestedSource = _.includes(suggestRules, message.source);
 
-          // if (
-          //   _.includes(fatalRules, message.ruleId) ||
-          //   _.includes(fatalRules, message.source)
-          // ) {
-          //   message.fatal = true;
-          // }
-          // if (suggestRules && (hasSuggestedRuleId || hasSuggestedSource)) {
-          //   message;
-          //   message.message = message.message.replace(
-          //     /don\’t use “(.*)”/gi,
-          //     (match, word) => {
-          //       return "Use “" + word + "” sparingly";
-          //     },
-          //   );
-          //   delete message.fatal;
-          //   // message.severity = 'suggest'; // Explicitly set severity to "suggest"
-          // }
-
-          if (message.source === "retext-readability") {
-            message.message = `This sentence is ${message.actual.split(" ").length} words long.
-
-            > ${message.actual}
-              
-            `
-              ;
+          if (
+            _.includes(fatalRules, message.ruleId) ||
+            _.includes(fatalRules, message.source)
+          ) {
+            message.fatal = true;
+          }
+          if (suggestRules && (hasSuggestedRuleId || hasSuggestedSource)) {
+            message;
+            // message.message = message.message.replace(
+            //   /don\’t use “(.*)”/gi,
+            //   (match, word) => {
+            //     return "Use “" + word + "” sparingly";
+            //   },
+            // );
+            delete message.fatal;
+            message.severity = 'suggest'; // Explicitly set severity to "suggest"
           }
 
-          message.source = `|\`${message.source}\``;
-          message.ruleId = `\`${message.ruleId}\`|`;
+          if (message.source === "retext-readability") {
+            message.message = `${message.message} | This sentence is ${message.actual.split(" ").length} words long.`;
+          }
+
+          // message.source = `\`${message.source}\``;
+          // message.ruleId = `|\`${message.ruleId}\`|`;
+          message.source = ` `;
+          message.ruleId = ` `;
 
           filteredMessages.push(message);
         });
         // results.contents = file.contents;
+        console.log(results);
         resolve(results);
       });
   });
