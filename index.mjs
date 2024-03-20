@@ -207,8 +207,16 @@ async function checkFile(file) {
           //   // message.severity = 'suggest'; // Explicitly set severity to "suggest"
           // }
 
-          message.source = `\`${message.source}\``;
-          message.ruleId = `\`${message.ruleId}\``;
+          if (message.source === "retext-readability") {
+            message.message = `${message.message}  
+            This sentence is ${message.actual.split(" ").length} words long.  
+            > ${message.actual}
+            `
+              ;
+          }
+
+          message.source = `|\`${message.source}\`|`;
+          message.ruleId = `|\`${message.ruleId}\`|`;
 
           filteredMessages.push(message);
         });

@@ -1,57 +1,32 @@
-// setupDictionaries.js
-
 import { map } from "async";
 import dictionaryEn from "dictionary-en";
 import "dotenv/config";
 import fs from "fs";
+import https from "https";
+
+// Function to fetch the bigcommerce.dic file from a GitHub repository
+const fetchBigcommerceDic = () => {
+  return new Promise((resolve, reject) => {
+    const url = "https://raw.githubusercontent.com/bigcommerce/dev-docs-style-guide-linter/master/dictionaries/bigcommerce.dic"; // Replace with the raw URL to the bigcommerce.dic file
+
+    https.get(url, (res) => {
+      let data = '';
+
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      res.on('end', () => {
+        resolve(data);
+      });
+    }).on('error', (err) => {
+      console.error(err);
+      reject(err);
+    });
+  });
+};
 
 async function setupDictionaries(config) {
-  // const extDictionary = async () => {
-  //     try {
-  //         const query = `
-  //     query {
-  //         linterDictionaryCollection {
-  //             items {
-  //                 sys {
-  //                     id
-  //                 }
-  //                 dictionary
-  //             }
-  //         },
-  //     }
-  //     `;
-  //         const response = await fetch(
-  //             `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-  //             {
-  //                 method: "POST",
-  //                 headers: {
-  //                     "Content-Type": "application/json",
-  //                     Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_API}`,
-  //                 },
-  //                 body: JSON.stringify({
-  //                     query: query,
-  //                     variables: {},
-  //                 }),
-  //             }
-  //         );
-  //         const data = await response.json();
-  //         if (data.errors) {
-  //             console.error(data.errors);
-  //             throw new Error("Failed to fetch events");
-  //         }
-  //         const dict = data.data.linterDictionaryCollection.items;
-  //         // console.log(dict[0].dictionary)
-  //         // Join the array of strings into a single string separated by newlines,
-  //         // and convert it to a Buffer
-  //         const dictBuffer = Buffer.from(dict[0].dictionary.join('\n'), 'utf8');
-  //         return dictBuffer;
-  //     } catch (error) {
-  //         console.error(error);
-  //     }
-  // }
-
-  // let extDictData = await extDictionary();
-
   let dictionary = dictionaryEn;
 
   let myReadFile = function (dictPath, cb) {
@@ -60,20 +35,30 @@ async function setupDictionaries(config) {
     });
   };
 
+  // Fetch the external bigcommerce dictionary
+  let extDictData;
+  try {
+    const extDictString = await fetchBigcommerceDic();
+    extDictData = Buffer.from(extDictString, 'utf8');
+  } catch (error) {
+    console.error("Failed to fetch bigcommerce.dic:", error);
+  }
+
   if (config.dictionaries && config.dictionaries.length >= 1) {
     dictionary = function (cb) {
       dictionaryEn(function (err, primary) {
         map(config.dictionaries, myReadFile, function (err, results) {
+          if (extDictData) {
+            results.unshift(extDictData);
+          }
           results.unshift(primary.dic);
-          // Add the extDictData to the combinedDictionaries
-          // results.unshift(extDictData);
           let combinedDictionaries = Buffer.concat(results);
           cb(
             err,
             !err && {
               aff: primary.aff,
               dic: combinedDictionaries,
-            },
+            }
           );
         });
       });
