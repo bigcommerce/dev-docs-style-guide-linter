@@ -112,3 +112,10 @@ webpack/M
 wildcard/S
 PHP
 WGAC
+allowlist
+SRI
+SRC
+Subresource
+SHA-256
+SHA-512
+SHA-384
