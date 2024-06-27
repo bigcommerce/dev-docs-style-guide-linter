@@ -119,3 +119,5 @@ Subresource
 SHA-256
 SHA-512
 SHA-384
+SSG
+minify
